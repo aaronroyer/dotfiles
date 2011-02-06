@@ -29,3 +29,20 @@ reload_shell() {
 		echo "Could not determine shell to reload"
 	fi
 }
+
+# Make symlink dotfiles in HOME to the regular files in Dropbox.
+# Just defer to the script that does it - it is standalone to allow
+# linking without sourcing this function first.
+link_dotfiles() {
+	dropbox_dir=$HOME/Dropbox
+	if [ -d $dropbox_dir ]; then
+		link_script=$dropbox_dir/dotfiles/link_dotfiles
+		if [ -f $link_script ]; then
+			ruby $link_script
+		else
+			echo "$link_script does not exist or is not a regular file"
+		fi
+	else
+		echo "$dropbox_dir does not exist or is not a directory - is Dropbox set up?"
+	fi
+}
