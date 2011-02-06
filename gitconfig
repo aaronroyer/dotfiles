@@ -1,0 +1,14 @@
+[user]
+	name = Aaron Royer
+	email = aaronroyer@gmail.com
+[diff]
+	color = auto
+[status]
+	color = auto
+[alias]
+	st = status
+	l = log --pretty=oneline --abbrev-commit
+	co = checkout
+	ci = commit
+	b = branch
+	c = commit

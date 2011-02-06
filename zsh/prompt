@@ -1,0 +1,17 @@
+
+parse_git_branch() {
+	local dirty git_status
+	git_status=$(git status 2>/dev/null)
+	[ "$git_status" ] || return
+	[[ "$git_status" == *'working directory clean'* ]] || dirty=' *'
+	echo "($(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* //')$dirty)"
+}
+
+parse_svn_revision() {
+	local dirty rev=$(svn info 2>/dev/null | grep Revision | sed -e 's/Revision: //')
+	[ "$rev" ] || return
+	[ "$(svn st)" ] && dirty=' *'
+	echo "(r$rev$dirty)"
+}
+
+PS1='%m:%1~$(parse_git_branch)$(parse_svn_revision) %n%(?..[%?])%# '

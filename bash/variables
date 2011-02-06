@@ -1,0 +1,33 @@
+
+export EDITOR="mate -w"
+
+# We want to be able to reload .bashrc and environment variables but PATH and
+# MANPATH would keep expanding if we did restore them to the originals first.
+if [ $ORIGINAL_PATH ]; then
+	PATH=$ORIGINAL_PATH
+else
+	export ORIGINAL_PATH=$PATH
+fi
+if [ $ORIGINAL_MANPATH ]; then
+	MANPATH=$ORIGINAL_MANPATH
+else
+	export ORIGINAL_MANPATH=$MANPATH
+fi
+
+export RUBYLIB="$HOME/lib/ruby"
+
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
+export MANPATH=/opt/local/share/man:$MANPATH
+
+
+# Colors
+export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
+
+# History
+export HISTCONTROL=ignoredups
+export HISTFILESIZE=3000
+export HISTIGNORE="ls:cd:exit:ll:clear:pwd"
+
+if [[ -f "$HOME/.amazon_keys" ]]; then
+	source "$HOME/.amazon_keys";
+fi

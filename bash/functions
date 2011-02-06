@@ -1,0 +1,19 @@
+
+# Find my projects
+p() {
+	if [ "$1" = "-h" ]; then
+		echo "Usage: p [-a, --all] PROJECTNAME"
+	else
+		eval "cd $(~/.bash/completion_scripts/project $1)"
+	fi
+}
+
+# Simple history find
+hf() {
+  grep "$@" ~/.bash_history
+}
+
+# mkdir and cd to it
+mcd() {
+	mkdir -p "$1" && cd "$1";
+}
