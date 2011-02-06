@@ -2,24 +2,17 @@
 alias mysql=/usr/local/mysql/bin/mysql
 alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 
-alias roku='~/lib/rokurb/bin/rrtk.rb'
-
-##### Misc shortcuts
-alias dotfiles='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
-alias macapps='git --git-dir=$HOME/.macapps.git/ --work-tree=$HOME/Library/Application\ Support'
-alias pingsweep='nmap -sP 192.168.1.0-255'
-alias rp='ruku pause'
-alias rubies='rvm use 1.8.7,1.9.2,ree,1.8.6'
-alias rr='rubies rake'
-alias cdb='cd `brew --prefix`'
-
 ##### SSH shortcuts
 alias ssha='ssh aaronroyer@aaronroyer.com'
 alias sshk='ssh kristinroyer@kristinroyer.com'
 alias sshf='ssh 192.168.1.47' # File server
 alias sshb='ssh b359384@hanjin.dreamhost.com' # Dreamhost backups server
 
-##### Rails-related shortcuts
+##### Ruby related shortcuts
+alias rubies='rvm use 1.8.7,1.9.2,ree,1.8.6'
+alias rr='rubies rake'
+
+##### Rails related shortcuts
 alias ss=script/server
 alias sc=script/console
 
@@ -28,6 +21,12 @@ alias ls="ls -G"
 alias l="ls -lG"
 alias ll="ls -alG"
 alias l.="ls -Gd .*"
+
+##### Misc shortcuts
+alias dotfiles='git --git-dir=$HOME/Dropbox/dotfiles/.git/ --work-tree=$HOME/Dropbox/dotfiles/'
+alias pingsweep='nmap -sP 192.168.1.0-255'
+alias rp='ruku pause'
+alias cdb='cd `brew --prefix`'
 
 
 ##### Mac-specific stuff

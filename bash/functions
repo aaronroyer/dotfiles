@@ -17,3 +17,15 @@ hf() {
 mcd() {
 	mkdir -p "$1" && cd "$1";
 }
+
+reload_shell() {
+	if command -v lsof >/dev/null; then
+		shell=$(lsof -p $$ | awk '(NR==2) {print $1}')
+		file=~/.${shell}rc
+		echo "Sourcing ${file}..."
+		source $file
+		echo "Done."
+	else
+		echo "Could not determine shell to reload"
+	fi
+}
