@@ -19,15 +19,15 @@ alias sshk='ssh kristinroyer@kristinroyer.com'
 alias sshf='ssh 192.168.1.47' # File server
 alias sshb='ssh b359384@hanjin.dreamhost.com' # Dreamhost backups server
 
-
 ##### Rails-related shortcuts
 alias ss=script/server
 alias sc=script/console
 
-##### I like colors
+##### Directories
 alias ls="ls -G"
 alias l="ls -lG"
 alias ll="ls -alG"
+alias l.="ls -Gd .*"
 
 
 ##### Mac-specific stuff

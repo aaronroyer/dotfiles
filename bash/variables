@@ -1,24 +1,29 @@
+# Path manipulation functions from github.com/rtomayko/dotfiles
 
+# Usage: pls [<var>]
+# List path entries of PATH or environment variable <var>.
+pls () { eval echo \$${1:-PATH} |tr : '\n'; }
+
+# Usage: puniq [<path>]
+# Remove duplicate entries from a PATH style value while retaining
+# the original order.
+#
+# Example:
+#   $ puniq /usr/bin:/usr/local/bin:/usr/bin
+#   /usr/bin:/usr/local/bin
+puniq () {
+    echo "$1" |tr : '\n' |nl |sort -u -k 2,2 |sort -n |
+    cut -f 2- |tr '\n' : |sed -e 's/:$//' -e 's/^://'
+}
+
+PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
+MANPATH=/opt/local/share/man:$MANPATH
+
+export PATH=$(puniq $PATH)
+export MANPATH=$(puniq $MANPATH)
+
+# Misc config
 export EDITOR="mate -w"
-
-# We want to be able to reload .bashrc and environment variables but PATH and
-# MANPATH would keep expanding if we did restore them to the originals first.
-if [ $ORIGINAL_PATH ]; then
-	PATH=$ORIGINAL_PATH
-else
-	export ORIGINAL_PATH=$PATH
-fi
-if [ $ORIGINAL_MANPATH ]; then
-	MANPATH=$ORIGINAL_MANPATH
-else
-	export ORIGINAL_MANPATH=$MANPATH
-fi
-
-export RUBYLIB="$HOME/lib/ruby"
-
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
-export MANPATH=/opt/local/share/man:$MANPATH
-
 
 # Colors
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
