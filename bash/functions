@@ -13,10 +13,8 @@ hf() {
   grep "$@" ~/.bash_history
 }
 
-# mkdir and cd to it
-mcd() {
-	mkdir -p "$1" && cd "$1";
-}
+
+##### Shell and dotfile management functions
 
 reload_shell() {
 	if command -v lsof >/dev/null; then
@@ -45,4 +43,8 @@ link_dotfiles() {
 	else
 		echo "$dropbox_dir does not exist or is not a directory - is Dropbox set up?"
 	fi
+}
+
+dotfiles_project() {
+	mate $HOME/Dropbox/dotfiles
 }
