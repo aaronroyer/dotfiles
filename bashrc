@@ -2,9 +2,17 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-for f in variables aliases functions completion prompt; do
-	if [ -f ~/.bash/$f ]; then
-		. ~/.bash/$f
+# Load common shell stuff
+for f in variables aliases functions; do
+	if [ -f ~/.shell.d/$f ]; then
+		. ~/.shell.d/$f
+	fi
+done
+
+# Load bash specific stuff
+for f in completion prompt; do
+	if [ -f ~/.shell.d/bash/$f ]; then
+		. ~/.shell.d/bash/$f
 	fi
 done
 

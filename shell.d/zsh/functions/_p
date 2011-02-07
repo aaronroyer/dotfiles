@@ -1,0 +1,4 @@
+#compdef p
+
+compadd $(~/.shell.d/bash/completion_scripts/project -z $BUFFER)
+return $?
