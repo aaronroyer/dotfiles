@@ -17,20 +17,22 @@ alias ss=script/server
 alias sc=script/console
 
 ##### Directories
-alias ls="ls -G"
-alias l="ls -lG"
-alias ll="ls -alG"
-alias l.="ls -Gd .*"
+# Look into the following
+# Find the option for using colors in ls, depending on the version: Linux or BSD
+# ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
+alias ls="ls -Gh"
+alias l="ls -l"
+alias ll="ls -al"
+alias l.="ls -d .*"
+
+alias cdb='cd `brew --prefix`'
 
 ##### Misc shortcuts
 alias dotfiles='git --git-dir=$HOME/Dropbox/dotfiles/.git/ --work-tree=$HOME/Dropbox/dotfiles/'
 alias pingsweep='nmap -sP 192.168.1.0-255'
 alias rp='ruku pause'
-alias cdb='cd `brew --prefix`'
-
 
 ##### Mac-specific stuff
 alias openports='sudo lsof -iTCP -sTCP:LISTEN -P'
-
 # http://superuser.com/questions/52483/terminal-tips-and-tricks-for-mac-os-x
 alias ql='qlmanage -p 2>/dev/null'

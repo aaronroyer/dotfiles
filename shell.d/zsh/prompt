@@ -1,10 +1,29 @@
+setopt prompt_subst
+
+# Color stuff from http://aperiodic.net/phil/prompt/
+autoload colors zsh/terminfo
+if [[ "$terminfo[colors]" -ge 8 ]]; then
+	colors
+fi
+for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+    eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+    eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
+    (( count = $count + 1 ))
+done
+PR_NO_COLOR="%{$terminfo[sgr0]%}"
+
 
 parse_git_branch() {
-	local dirty git_status
+	local dirty git_status color
 	git_status=$(git status 2>/dev/null)
 	[ "$git_status" ] || return
-	[[ "$git_status" == *'working directory clean'* ]] || dirty=' *'
-	echo "($(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* //')$dirty)"
+	if [[ "$git_status" == *'working directory clean'* ]]; then
+		color=$PR_GREEN
+	else
+		color=$PR_YELLOW
+		dirty=' *'
+	fi
+	echo "($color$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* //')$PR_NO_COLOR$dirty)"
 }
 
 parse_svn_revision() {
@@ -14,4 +33,4 @@ parse_svn_revision() {
 	echo "(r$rev$dirty)"
 }
 
-PS1='%m:%1~$(parse_git_branch)$(parse_svn_revision) %n%(?..[%?])%# '
+PS1='%n@%m:%1~$(parse_git_branch)$(parse_svn_revision) %(?..[%?])%# '

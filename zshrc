@@ -1,7 +1,4 @@
 
-# Options
-setopt prompt_subst
-
 # General shell config
 fpath=(~/.shell.d/zsh/functions $fpath)
 autoload -U ~/.shell.d/zsh/functions/*(:t)
