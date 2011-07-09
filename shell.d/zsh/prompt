@@ -1,16 +1,16 @@
 setopt prompt_subst
 
 # Color stuff from http://aperiodic.net/phil/prompt/
-autoload colors zsh/terminfo
-if [[ "$terminfo[colors]" -ge 8 ]]; then
-	colors
-fi
-for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
-    eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
-    eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
-    (( count = $count + 1 ))
-done
-PR_NO_COLOR="%{$terminfo[sgr0]%}"
+#autoload colors zsh/terminfo
+#if [[ "$terminfo[colors]" -ge 8 ]]; then
+#	colors
+#fi
+#for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+#    eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+#    eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
+#    (( count = $count + 1 ))
+#done
+#PR_NO_COLOR="%{$terminfo[sgr0]%}"
 
 
 parse_git_branch() {
@@ -33,4 +33,8 @@ parse_svn_revision() {
 	echo "(r$rev$dirty)"
 }
 
-PS1='%n@%m:%1~$(parse_git_branch)$(parse_svn_revision) %(?..[%?])%# '
+autoload -U colors && colors
+
+#PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "
+
+PS1='%{$bold_color%}%n@%m%{$reset_color%}:%1~$(parse_git_branch)$(parse_svn_revision) %(?..[%?])%# '

@@ -12,3 +12,4 @@
 	ci = commit
 	b = branch
 	c = commit
+	nm = branch --no-merged

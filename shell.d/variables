@@ -17,13 +17,14 @@ puniq () {
 }
 
 PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
-MANPATH=/opt/local/share/man:$MANPATH
+#MANPATH=/opt/local/share/man:$MANPATH
 
 export PATH=$(puniq $PATH)
-export MANPATH=$(puniq $MANPATH)
+#export MANPATH=$(puniq $MANPATH)
 
 # Misc config
 export EDITOR="mate -w"
+export LESS='iMRw'
 
 # Colors
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
