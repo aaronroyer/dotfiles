@@ -5,8 +5,8 @@ autoload -U ~/.shell.d/zsh/functions/*(:t)
 
 # Load common shell stuff
 for f in variables aliases functions; do
-	if [ -f ~/.shell.d/$f ]; then
-		source ~/.shell.d/$f
+	if [ -f ~/.shell.d/common/$f ]; then
+		source ~/.shell.d/common/$f
 	fi
 done
 

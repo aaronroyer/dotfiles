@@ -4,8 +4,8 @@ fi
 
 # Load common shell stuff
 for f in variables aliases functions; do
-	if [ -f ~/.shell.d/$f ]; then
-		. ~/.shell.d/$f
+	if [ -f ~/.shell.d/common/$f ]; then
+		. ~/.shell.d/common/$f
 	fi
 done
 
