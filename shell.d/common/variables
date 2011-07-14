@@ -1,19 +1,24 @@
-# Path manipulation functions from github.com/rtomayko/dotfiles
+# Path manipulation functions inspired by github.com/rtomayko/dotfiles
 
 # Usage: pls [<var>]
 # List path entries of PATH or environment variable <var>.
-pls () { eval echo \$${1:-PATH} |tr : '\n'; }
+pls () {
+	local p=$PATH
+	[[ "$#" -ge 1 ]] && p=$1
+	echo $p | tr : '\n'
+}
 
 # Usage: puniq [<path>]
-# Remove duplicate entries from a PATH style value while retaining
-# the original order.
+# Remove duplicate entries from a PATH style value while retaining the original order.
 #
 # Example:
 #   $ puniq /usr/bin:/usr/local/bin:/usr/bin
 #   /usr/bin:/usr/local/bin
 puniq () {
-    echo "$1" |tr : '\n' |nl |sort -u -k 2,2 |sort -n |
-    cut -f 2- |tr '\n' : |sed -e 's/:$//' -e 's/^://'
+	local p=$PATH
+	[[ "$#" -ge 1 ]] && p=$1
+	echo "$p" | tr : '\n' | nl | sort -u -k 2,2 | sort -n |
+	cut -f 2- | tr '\n' : | sed -e 's/:$//' -e 's/^://'
 }
 
 PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
@@ -21,6 +26,8 @@ PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
 
 export PATH=$(puniq $PATH)
 #export MANPATH=$(puniq $MANPATH)
+
+export PROJECT_DIRS=~/projects/pro:~/projects/personal
 
 # Misc config
 export EDITOR="mate -w"

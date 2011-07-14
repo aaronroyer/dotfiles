@@ -1,4 +1,4 @@
 #compdef p
 
-compadd $(~/.shell.d/bash/completion_scripts/project -z $BUFFER)
+compadd $(find_projects | sed 's/.*\///' | grep "^$(echo $BUFFER | sed 's/^.* //')")
 return $?

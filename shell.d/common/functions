@@ -1,11 +1,14 @@
 
-# Find my projects
-p() {
-	if [ "$1" = "-h" ]; then
-		echo "Usage: p [-a, --all] PROJECTNAME"
-	else
-		eval "cd $(~/.shell.d/bash/completion_scripts/project $1)"
-	fi
+# mkdir and cd to it
+mcd() {
+	[[ -z "$1" ]] && { echo "Usage: $0 DIRNAME" >&2; return 1; }
+	mkdir -p "$1" && cd "$1"
+}
+
+# Display a man page in Preview
+pman() {
+	[[ -z "$1" ]] && { echo "Usage: $0 MANPAGE" >&2; return 1; }
+	man -t "${1}" | open -f -a /Applications/Preview.app
 }
 
 # Simple history find
@@ -13,28 +16,58 @@ hf() {
   grep "$@" ~/.bash_history
 }
 
+##### Project stuff
+
+find_projects() {
+	local include_archived="no"
+	[[ "$1" = "-a" ]] && include_archived="yes"
+	for d in $(echo $PROJECT_DIRS | tr : "\n"); do
+		find $d -type d -mindepth 1 -maxdepth 1 | grep -v 'ARCHIVE$'
+		if [[ "$include_archived" = "yes" ]] && [[ -d $d/ARCHIVE ]]; then
+			find "$d/ARCHIVE" -type d -mindepth 1 -maxdepth 1 | grep -v 'ARCHIVE$'
+		fi
+	done
+}
+
+resolve_project() {
+	for project in $(find_projects); do
+		[[ "$(basename $project)" = "$1" ]] && { echo $project; return 0 }
+	done
+	return 1
+}
+
+# Find my projects
+p() {
+	if [[ "$1" = "-h" ]]; then
+		echo "Usage: p [-a, --all] PROJECTNAME"
+	else
+		local project=$(resolve_project $1)
+		if [[ -n "$project" ]]; then
+			cd $project
+		else
+			echo "Could not find project: $1" >&2
+			return 1
+		fi
+	fi
+}
 
 ##### Shell and dotfile management functions
 
 reload_shell() {
-	if command -v lsof >/dev/null; then
-		shell=$(lsof -p $$ | awk '(NR==2) {print $1}')
-		file=~/.${shell}rc
-		echo "Sourcing ${file}..."
-		source $file
-		echo "Done."
-	else
-		echo "Could not determine shell to reload"
-	fi
+	local rc_file=~/.zshrc
+	[[ -z "$ZSH_VERSION" ]] && rc_file=~/.bashrc
+	echo "Sourcing ${rc_file}..."
+	source $rc_file
+	echo "Done."
 }
 
 # Make symlink dotfiles in HOME to the regular files in Dropbox.
 # Just defer to the script that does it - it is standalone to allow
 # linking without sourcing this function first.
 link_dotfiles() {
-	dropbox_dir=$HOME/Dropbox
+	local dropbox_dir=$HOME/Dropbox
 	if [ -d $dropbox_dir ]; then
-		link_script=$dropbox_dir/dotfiles/link_dotfiles
+		local link_script=$dropbox_dir/dotfiles/link_dotfiles
 		if [ -f $link_script ]; then
 			ruby $link_script
 		else
