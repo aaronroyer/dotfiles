@@ -72,9 +72,11 @@ link_dotfiles() {
 			ruby $link_script
 		else
 			echo "$link_script does not exist or is not a regular file"
+			return 1
 		fi
 	else
 		echo "$dropbox_dir does not exist or is not a directory - is Dropbox set up?"
+		return 1
 	fi
 }
 
