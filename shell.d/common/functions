@@ -16,6 +16,16 @@ hf() {
   grep "$@" ~/.bash_history
 }
 
+d() {
+	local ds="$(dirs -v)"
+	if [[ $# -eq 0 ]]; then
+		echo $ds
+	else
+		# Get directory with the given number in the stack
+		echo $ds | grep "^${1}[[:space:]]" | awk '{print $2}'
+	fi
+}
+
 ##### Project stuff
 
 find_projects() {
@@ -31,7 +41,7 @@ find_projects() {
 
 resolve_project() {
 	for project in $(find_projects); do
-		[[ "$(basename $project)" = "$1" ]] && { echo $project; return 0 }
+		[[ "$(basename $project)" = "$1" ]] && { echo $project; return 0; }
 	done
 	return 1
 }

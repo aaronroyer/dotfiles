@@ -33,6 +33,8 @@ export PROJECT_DIRS=~/projects/pro:~/projects/personal
 export EDITOR="mate -w"
 export LESS='iMRw'
 
+export RLWRAP_HOME=~/.rlwrap
+
 # Colors
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
