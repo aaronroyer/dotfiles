@@ -42,18 +42,20 @@ alias du1='du -d 1'
 alias df='df -h'
 
 alias 1='cd -'
-alias 2='cd +2'
-alias 3='cd +3'
-alias 4='cd +4'
-alias 5='cd +5'
-alias 6='cd +6'
-alias 7='cd +7'
-alias 8='cd +8'
-alias 9='cd +9'
+# aliases for switching to directories on stack (example: 4='cd +4')
+for n in 2 3 4 5 6 7 8 9; do eval alias "$n='cd +$n'"; done
+#aliases for d function, to echo directories from the stack
+for n in 0 1 2 3 4 5 6 7 8 9; do eval alias "d$n='d $n'"; done
+
+##### Networking
+alias pingsweep='nmap -sP 192.168.1.0-255'
+# Next 3 from https://github.com/mathiasbynens/dotfiles/blob/master/.aliases
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en1"
+alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 
 ##### Misc shortcuts
 alias dotfiles='git --git-dir=$HOME/Dropbox/dotfiles/.git/ --work-tree=$HOME/Dropbox/dotfiles/'
-alias pingsweep='nmap -sP 192.168.1.0-255'
 alias rp='ruku pause'
 
 ##### Mac-specific stuff
@@ -61,3 +63,11 @@ alias openports='sudo lsof -iTCP -sTCP:LISTEN -P'
 # http://superuser.com/questions/52483/terminal-tips-and-tricks-for-mac-os-x
 alias ql='qlmanage -p 2>/dev/null'
 alias preview='qlmanage -p 2>/dev/null'
+
+# One of @janmoesen’s ProTip™s
+#for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do alias "$method"="lwp-request -m '$method'"; done
+
+# Stuff from https://github.com/mathiasbynens/dotfiles/blob/master/.aliases and http://xkcd.com/530/
+alias stfu="osascript -e 'set volume output muted true'"
+alias pumpitup="osascript -e 'set volume 10'"
+alias hax="growlnotify -a 'Activity Monitor' 'System error' -m 'WTF R U DOIN'"
