@@ -34,6 +34,9 @@ alias l.='ls -d .*'
 
 alias cdb='cd `brew --prefix`'
 
+# cd to the directory in the Finder's front window
+alias cdf='cd "$(posd)" '
+
 # TODO: make these work on Linux, too
 alias du='du -h'
 alias du0='du -d 0'

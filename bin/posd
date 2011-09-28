@@ -1,0 +1,29 @@
+#!/bin/zsh -f
+# From POS, found here http://www.finkproject.org/bindist/dists/fink-0.9.0/main/source/utils/pos-1.2.tgz
+# or here https://github.com/mxcl/homebrew/blob/master/Library/Formula/pos.rb
+
+thePath="$( osascript<<END
+try
+	tell application "Finder" to set the source_folder to (folder of the front window) as alias
+on error -- no open folder windows
+	set the source_folder to path to desktop folder as alias
+end try
+
+set thePath to (POSIX path of the source_folder as string)
+set result to thePath
+END
+ )"
+
+
+
+if [[ -n "${thePath%/*}" ]]; then
+
+    if [[ -d "$thePath" ]]; then
+        echo "${thePath%/}"
+    else
+        echo "${thePath%/*}"
+    fi
+
+else
+   echo "/"
+fi

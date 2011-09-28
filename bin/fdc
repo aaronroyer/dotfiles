@@ -1,0 +1,23 @@
+#!/bin/zsh -f
+# From POS, found here http://www.finkproject.org/bindist/dists/fink-0.9.0/main/source/utils/pos-1.2.tgz
+# or here https://github.com/mxcl/homebrew/blob/master/Library/Formula/pos.rb
+
+if [[ -n "$1" ]]; then
+	if [[ "${1%%/*}" = "" ]]; then
+		thePath="$1"
+	else
+		thePath=`pwd`"/$1"
+	fi
+else
+	thePath=`pwd`
+fi
+
+osascript<<END
+set myPath to ( POSIX file "$thePath" as alias )
+try
+	tell application "Finder" to set the (folder of the front window) to myPath
+on error -- no open folder windows
+	tell application "Finder" to open myPath
+end try
+END
+

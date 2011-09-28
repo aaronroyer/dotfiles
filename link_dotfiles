@@ -10,6 +10,7 @@ rescue LoadError
 end
 
 dotfiles_dir = File.dirname(__FILE__)
+dotfiles_bin_dir = File.join(dotfiles_dir, 'bin')
 home_dir = ENV['HOME']
 
 if not File.exist?(home_dir)
@@ -17,24 +18,43 @@ if not File.exist?(home_dir)
   exit 1
 end
 
-Dir.entries(dotfiles_dir).reject{|f| f =~ /^\./ || f == File.basename(__FILE__)}.each do |f|
-  dotfiles_path = File.expand_path(File.join(dotfiles_dir, f))
-  dot_f = ".#{f}"
-  home_path = File.join(home_dir, dot_f)
+def link_it(dotfiles_path, home_path)
+  home_base = File.basename(home_path)
   if not File.exist?(home_path)
     begin
       File.symlink(dotfiles_path, home_path)
-      puts "Link created:     #{green(dot_f)} -> #{dotfiles_path}"
+      puts "Link created:     #{green home_base} -> #{dotfiles_path}"
     rescue
-      puts red("Problem creating link: #{dot_f} -> #{dotfiles_path}")
+      puts red("Problem creating link: #{home_base} -> #{dotfiles_path}")
     end
   elsif File.symlink?(home_path)
     if File.readlink(home_path) == dotfiles_path
-      puts "Linked properly:  #{green(dot_f)}"
+      puts "Linked properly:  #{green home_base}"
     else
-      puts "Linked elsewhere: #{red(dot_f)}"
+      puts "Linked elsewhere: #{red home_base}"
     end
   else
-    puts "Regular file:     #{yellow(dot_f)}"
+    puts "Regular file:     #{yellow home_base}"
   end
+end
+
+puts "Linking regular dotfiles..."
+# Link everything at the top level in the dotfiles dir except for the bin dir and this script
+Dir.entries(dotfiles_dir).reject{|f| f =~ /^\./ || f == File.basename(__FILE__) || f == 'bin'}.each do |f|
+  dotfiles_path = File.expand_path(File.join(dotfiles_dir, f))
+  home_path = File.join(home_dir, ".#{f}")
+  link_it(dotfiles_path, home_path)
+end
+
+home_bin_dir = File.join(home_dir, 'bin')
+if not File.exist?(home_bin_dir)
+  puts "No bin directory in #{home_dir}"
+  exit 1
+end
+
+puts "Linking synced bin scripts..."
+Dir.entries(dotfiles_bin_dir).reject{|f| f =~ /^\./ }.each do |f|
+  dotfiles_path = File.expand_path(File.join(dotfiles_bin_dir, f))
+  home_path = File.join(home_bin_dir, f)
+  link_it(dotfiles_path, home_path)
 end
