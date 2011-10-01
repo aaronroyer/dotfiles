@@ -20,5 +20,5 @@ done
 
 set bell-style visible
 
-# Load up RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Load up rbenv
+eval "$(rbenv init -)"

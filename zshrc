@@ -22,5 +22,5 @@ for f in prompt completion; do
 	fi
 done
 
-# Load up RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Load up rbenv
+eval "$(rbenv init -)"
