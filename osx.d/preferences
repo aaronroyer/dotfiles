@@ -1,4 +1,7 @@
+#!/bin/bash
 # Originally based on stuff from https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+
+echo -n "Setting OS X preferences... "
 
 # Enable the 2D Dock
 defaults write com.apple.dock no-glass -bool true
@@ -30,8 +33,26 @@ defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Disable Resume system-wide
+# Disable Resume system-wide (restoring windows in apps)
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Empty Trash securely by default
+defaults write com.apple.finder EmptyTrashSecurely -bool true
+
+# Disable the Ping sidebar in iTunes
+defaults write com.apple.iTunes disablePingSidebar -bool true
+
+# Disable all the other Ping stuff in iTunes
+defaults write com.apple.iTunes disablePing -bool true
+
+# Display full POSIX path as Finder window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Increase window resize speed for Cocoa applications
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
@@ -43,6 +64,8 @@ chflags nohidden ~/Library
 # Fix for the ancient UTF-8 bug in QuickLook (http://mths.be/bbo)
 echo "0x08000100:0" > ~/.CFUserTextEncoding
 
+
+echo "Done."
 
 ##### Maybes
 
@@ -83,4 +106,4 @@ echo "0x08000100:0" > ~/.CFUserTextEncoding
 #rm ~/Library/Application\ Support/Dock/*.db
 
 # Disable local Time Machine backups
-#sudo tmutil disablelocal
+#hash tmutil &> /dev/null && sudo tmutil disablelocal

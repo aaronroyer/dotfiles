@@ -1,4 +1,8 @@
 
+is_osx() {
+	echo $OSTYPE | grep -q 'darwin'
+}
+
 # mkdir and cd to it
 mcd() {
 	[[ -z "$1" ]] && { echo "Usage: $0 DIRNAME" >&2; return 1; }
@@ -99,3 +103,9 @@ link_dotfiles() {
 dotfiles_project() {
 	mate $HOME/Dropbox/dotfiles
 }
+
+if is_osx; then
+	osx_setup() {
+		~/.osx.d/osx_setup
+	}
+fi

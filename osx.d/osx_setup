@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+begin
+  require 'rubygems'
+  require 'term/ansicolor'
+  extend Term::ANSIColor
+rescue LoadError
+  def green(txt); txt; end
+  alias :red :green
+  alias :yellow :green
+end
+
+##### Utilities
+
+def setup_file_path(filename)
+  File.join(File.dirname(__FILE__), filename)
+end
+
+# Read out a file in the osx.d directory as a string
+def read_setup_file(filename)
+  IO.read(setup_file_path(filename))
+end
+
+
+##### Homebrew stuff
+
+def formulae; read_setup_file('brew-formula').split("\n"); end
+
+def install_formula(formula)
+  print "Install #{formula}? Enter or 'y' to continue or 'n' to skip [y] "
+  if gets.strip.downcase == 'n'
+    puts "  SKIPPED installing #{formula}"
+  else
+    puts "Installing #{formula}..."
+    `brew install #{formula}`
+  end
+end
+
+def install_formulae
+  puts "Checking Homebrew formulae..."
+  installed = `brew list`.split("\n")
+
+  formulae.each do |f|
+    if installed.grep(f).empty?
+      install_formula f
+    else
+      puts "Installed: #{green f}"
+    end
+  end
+end
+
+
+##### Preferences
+
+def set_preferences
+  system "#{setup_file_path 'preferences'}"
+end
+
+##### Put it all together
+
+def setup
+  set_preferences
+  install_formulae
+end
+
+setup if $0 == __FILE__
