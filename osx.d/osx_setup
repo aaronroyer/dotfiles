@@ -11,19 +11,14 @@ end
 
 ##### Utilities
 
-def setup_file_path(filename)
-  File.join(File.dirname(__FILE__), filename)
-end
-
+# Get a full path of a file in the osx.d directory
+def setup_file_path(filename); File.join(File.dirname(__FILE__), filename); end
 # Read out a file in the osx.d directory as a string
-def read_setup_file(filename)
-  IO.read(setup_file_path(filename))
-end
-
+def read_setup_file(filename); IO.read(setup_file_path(filename)); end
 
 ##### Homebrew stuff
 
-def formulae; read_setup_file('brew-formula').split("\n"); end
+def formulae; read_setup_file('brew_formula').split("\n"); end
 
 def install_formula(formula)
   print "Install #{formula}? Enter or 'y' to continue or 'n' to skip [y] "
@@ -51,8 +46,32 @@ end
 
 ##### Preferences
 
+def mac_apps
+  Hash[*read_setup_file('apps').split("\n").map do |a|
+    name, url = a.split('||')
+    [name, url || "http://www.google.com/search?q=#{name}"]
+  end.flatten]
+end
+
+def check_apps
+  puts "Checking Mac apps..."
+  apps = mac_apps
+  installed = Dir.entries('/Applications').select{|e| e =~ /\.app$/}.map {|a| a.sub(/\.app$/, '')}
+  apps.keys.sort.each do |a|
+    if installed.include?(a)
+      puts "Installed: #{green a}"
+    else
+      puts "Not installed: #{red a}, find at: #{apps[a]}"
+      print "Open URL? Enter or 'y' to continue or 'n' to skip [y] "
+      system "open #{apps[a]}" unless gets.strip.downcase == 'n'
+    end
+  end
+end
+
+##### Preferences
+
 def set_preferences
-  system "#{setup_file_path 'preferences'}"
+  system "#{setup_file_path 'set_preferences'}"
 end
 
 ##### Put it all together
@@ -60,6 +79,7 @@ end
 def setup
   set_preferences
   install_formulae
+  check_apps
 end
 
 setup if $0 == __FILE__
