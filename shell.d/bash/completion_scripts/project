@@ -1,21 +1,21 @@
 #!/usr/bin/env ruby
 
-PROJECT_HOME = '~/projects/'
+PROJECT_HOME = '~/Projects/'
 PROJECT_DIRS = ['personal', 'pro']
 
 module Projects
   def projects; find_projects(PROJECT_DIRS); end
   def project_names; projects.keys; end
-  
+
   def archived_projects; find_projects(PROJECT_DIRS.map {|dir| "#{dir}/ARCHIVE"}); end
   def archived_project_names; archived_projects.keys; end
-  
+
   protected
-  
+
   def find_projects(dirs)
     projs = {}
     dirs.each do |dir|
-      
+
       ind_proj_dir = "#{PROJECT_HOME}#{dir}/"
       `ls #{ind_proj_dir}`.split.each do |name|
         projs[name] = "#{ind_proj_dir}#{name}" unless name == "ARCHIVE"
@@ -27,19 +27,19 @@ end
 
 class ProjectCompletion
   include Projects
-  
+
   def initialize(cmd)
     @cmd = cmd
     @all = @cmd.split.include?('-a') || @cmd.split.include?('--all')
   end
-  
+
   def completions
     all_project_names = @all ? project_names + archived_project_names : project_names
     all_project_names.select do |proj|
       proj[0, typed.length] == typed
     end
   end
-  
+
   def typed
     args = @cmd.split
     args.shift
@@ -49,11 +49,11 @@ end
 
 class ProjectLookup
   include Projects
-  
+
   def initialize(project_name)
     @project_name = project_name
   end
-  
+
   def resolve
     # Always look for all projects, but look in archives last
     path = projects[@project_name]

@@ -27,7 +27,7 @@ PATH=~/bin:~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/loc
 export PATH=$(puniq $PATH)
 #export MANPATH=$(puniq $MANPATH)
 
-export PROJECT_DIRS=~/projects/pro:~/projects/personal
+export PROJECT_DIRS=~/Projects/pro:~/Projects/personal
 
 # Misc config
 export EDITOR="mate -w"
