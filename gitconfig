@@ -13,3 +13,5 @@
 	b = branch
 	c = commit
 	nm = branch --no-merged
+[core]
+	excludesfile = /Users/aaron/.gitignore_global
