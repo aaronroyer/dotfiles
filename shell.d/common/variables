@@ -43,6 +43,15 @@ export HISTCONTROL=ignoredups
 export HISTFILESIZE=3000
 export HISTIGNORE="ls:cd:exit:ll:clear:pwd"
 
+# Detect SSH
+if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
+  SESSION_TYPE=remote/ssh
+else
+  case $(ps -o comm= -p $PPID) in
+    sshd|*/sshd) SESSION_TYPE=remote/ssh;;
+  esac
+fi
+
 if [[ -f "$HOME/.amazon_keys" ]]; then
 	source "$HOME/.amazon_keys";
 fi

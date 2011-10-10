@@ -12,6 +12,10 @@
 	ci = commit
 	b = branch
 	c = commit
+	d = diff
 	nm = branch --no-merged
 [core]
 	excludesfile = /Users/aaron/.gitignore_global
+[color]
+	branch = auto
+	interactive = auto

@@ -104,6 +104,10 @@ dotfiles_project() {
 	mate $HOME/Dropbox/dotfiles
 }
 
+is_ssh_shell() {
+	[[ "$SESSION_TYPE" = 'remote/ssh' ]]
+}
+
 if is_osx; then
 	osx_setup() {
 		~/.osx.d/osx_setup
