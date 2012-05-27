@@ -9,15 +9,18 @@ alias sshf='ssh 192.168.1.47' # File server
 alias sshb='ssh b359384@hanjin.dreamhost.com' # Dreamhost backups server
 
 ##### Ruby related shortcuts
-alias rubies='rvm use 1.8.7,1.9.2,1.8.6'
-alias all_rubies='rvm use 1.8.7,1.9.2,1.8.6,ree'
-alias rr='rubies rake'
-alias rrr='all_rubies rake'
 alias gsr='gem search --remote'
-alias r6='rvm use 1.8.6'
-alias r7='rvm use 1.8.7'
-alias r9='rvm use 1.9.2'
-alias re='rvm use ree'
+alias be='bundle exec'
+
+##### Git related shortcuts
+alias g=git
+alias gb='git branch'
+alias gs='git status'
+alias gd='git diff'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gcam='git commit -am'
+alias gl='git log --pretty=oneline --abbrev-commit'
 
 ##### Rails related shortcuts
 alias ss=script/server
@@ -35,7 +38,7 @@ alias l.='ls -d .*'
 alias cdb='cd `brew --prefix`'
 
 # cd to the directory in the Finder's front window
-alias cdf='cd "$(posd)" '
+alias cdf='cd "$(posd)"'
 
 # TODO: make these work on Linux, too
 alias du='du -h'

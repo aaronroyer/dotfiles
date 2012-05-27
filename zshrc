@@ -4,9 +4,17 @@ fpath=(~/.shell.d/zsh/functions $fpath)
 autoload -U ~/.shell.d/zsh/functions/*(:t)
 
 setopt auto_pushd
-#setopt pushd_silent # Needed to silence pushd?
+#setopt pushd_silent # Need to silence pushd?
 setopt pushd_to_home # Use home when no arguments specified
 setopt pushd_ignoredups
+
+##### Key bindings
+# Next 2 require option to be set as meta key in Terminal (which also
+# allows backward kill word with option+delete)
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
+bindkey '^[[5D' beginning-of-line
+bindkey '^[[5C' end-of-line
 
 # Load common shell stuff
 for f in variables aliases functions; do
@@ -21,6 +29,3 @@ for f in prompt completion; do
 		source ~/.shell.d/zsh/$f
 	fi
 done
-
-# Load up rbenv
-eval "$(rbenv init -)"

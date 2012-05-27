@@ -19,6 +19,3 @@ done
 ##### General shell config
 
 set bell-style visible
-
-# Load up rbenv
-eval "$(rbenv init -)"

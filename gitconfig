@@ -15,7 +15,7 @@
 	d = diff
 	nm = branch --no-merged
 [core]
-	excludesfile = /Users/aaron/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [color]
 	branch = auto
 	interactive = auto

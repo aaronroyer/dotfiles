@@ -76,7 +76,7 @@ p() {
 reload_shell() {
 	local rc_file=~/.zshrc
 	[[ -z "$ZSH_VERSION" ]] && rc_file=~/.bashrc
-	echo "Sourcing ${rc_file}..."
+	echo -n "Sourcing ${rc_file}... "
 	source $rc_file
 	echo "Done."
 }
