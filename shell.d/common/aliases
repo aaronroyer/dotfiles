@@ -24,7 +24,10 @@ alias gl='git log --pretty=oneline --abbrev-commit'
 
 ##### Rails related shortcuts
 alias ss=script/server
+alias sspc='script/server --perform_caching'
+alias ssfc='script/server --force_caching'
 alias sc=script/console
+alias fs='foreman start'
 
 ##### Directories
 # Look into the following

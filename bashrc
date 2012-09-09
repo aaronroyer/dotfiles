@@ -19,3 +19,5 @@ done
 ##### General shell config
 
 set bell-style visible
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

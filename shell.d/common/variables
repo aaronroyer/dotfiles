@@ -37,13 +37,19 @@ export RLWRAP_HOME=~/.rlwrap
 
 export NODE_PATH=/usr/local/lib/node_modules
 
+# VOX
+export SOLR_HOME=~/Projects/pro/solr14
+export PATH="/usr/local/mysql/bin:$PATH"
+
 # Colors
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
 # History
+export HISTFILE=~/.zhistory
 export HISTCONTROL=ignoredups
 export HISTFILESIZE=3000
 export HISTIGNORE="ls:cd:exit:ll:clear:pwd"
+setopt INC_APPEND_HISTORY
 
 # Detect SSH
 if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then

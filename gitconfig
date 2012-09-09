@@ -19,3 +19,11 @@
 [color]
 	branch = auto
 	interactive = auto
+[credential]
+	helper = osxkeychain
+[branch]
+	autosetuprebase = always
+[github]
+	user = aaronroyer
+[push]
+	default = upstream

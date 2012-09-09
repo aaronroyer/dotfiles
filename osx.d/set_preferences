@@ -57,6 +57,8 @@ defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
+# Disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -boolean YES
 
 # Kill affected applications
 #for app in Safari Finder Dock Mail; do killall "$app"; done

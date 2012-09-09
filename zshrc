@@ -16,6 +16,12 @@ bindkey '^[^[[C' forward-word
 bindkey '^[[5D' beginning-of-line
 bindkey '^[[5C' end-of-line
 
+# Allow Control-X E to open the editor (doesn't work by default in zsh)
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+
+
 # Load common shell stuff
 for f in variables aliases functions; do
 	if [ -f ~/.shell.d/common/$f ]; then
@@ -29,3 +35,5 @@ for f in prompt completion; do
 		source ~/.shell.d/zsh/$f
 	fi
 done
+
+# Config ideas: https://github.com/sorin-ionescu/oh-my-zsh/blob/master/modules/environment/init.zsh
