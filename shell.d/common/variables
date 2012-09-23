@@ -48,6 +48,7 @@ export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 export HISTFILE=~/.zhistory
 export HISTCONTROL=ignoredups
 export HISTFILESIZE=3000
+export SAVEHIST=$HISTFILESIZE
 export HISTIGNORE="ls:cd:exit:ll:clear:pwd"
 setopt INC_APPEND_HISTORY
 
