@@ -7,7 +7,7 @@ pman() {
 
 # Simple history find
 hf() {
-  grep "$@" ~/.bash_history
+  grep "$@" ~/.zhistory
 }
 
 # search the directory frontmost in the Finder
@@ -34,7 +34,7 @@ reload_shell() {
 }
 
 dotfiles_project() {
-	mate $HOME/Dropbox/dotfiles
+	subl $HOME/Dropbox/dotfiles
 }
 
 # Make symlink dotfiles in HOME to the regular files in Dropbox.

@@ -1,4 +1,5 @@
 --smart-case
+--type-set=json=.json
 --type-set=erb=.erb
 --type-add=css=.scss
 --type-add=html=.html.erb

@@ -1,0 +1,14 @@
+
+# TODO: run ruby unit tests by pattern function
+
+rt() {
+	echo "not implemented yet..." && return 1
+	local orig_dir=$(pwd)
+	p || { cd $orig_dir; return 1; } # Up to the top-level project dir
+	[[ -d test ]] || return 2;
+
+	cd test
+	ack -g "$1"
+
+	cd $orig_dir
+}

@@ -1,4 +1,4 @@
 
-for f in util dirs projects misc; do
+for f in util dirs projects misc dev; do
 	source ~/.shell.d/common/functions.d/$f
 done
