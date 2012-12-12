@@ -20,7 +20,7 @@ alias gd='git diff'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gcam='git commit -am'
-alias gl='git log --pretty=oneline --abbrev-commit'
+alias gl='git log --pretty=oneline --abbrev-commit --decorate'
 
 ##### Rails related shortcuts
 alias ss=script/server
@@ -66,6 +66,7 @@ alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 ##### Misc shortcuts
 alias dotfiles='git --git-dir=$HOME/Dropbox/dotfiles/.git/ --work-tree=$HOME/Dropbox/dotfiles/'
 alias rp='ruku pause'
+alias simple_server='python -m SimpleHTTPServer 8000'
 
 ##### Mac-specific stuff
 alias openports='sudo lsof -iTCP -sTCP:LISTEN -P'

@@ -7,7 +7,7 @@
 	color = auto
 [alias]
 	st = status
-	l = log --pretty=oneline --abbrev-commit
+	l = log --pretty=oneline --abbrev-commit --decorate
 	co = checkout
 	ci = commit
 	b = branch

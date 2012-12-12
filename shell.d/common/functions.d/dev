@@ -12,3 +12,20 @@ rt() {
 
 	cd $orig_dir
 }
+
+# Checkout last git branch, as grepped out of the reflog
+glb() {
+  local last_branch=$(git reflog | grep checkout | head -1 | ruby -e 'STDIN.read =~ /from ([\w\d_\-]*)/; puts $1')
+  [[ -z "$last_branch" ]] && return 1
+  echo "Checking out last branch: $last_branch"
+  git co $last_branch
+}
+
+sbdeploy() {
+  if [[ $# -ne 1 ]]; then
+    echo "Usage: sbdeploy SANDBOX"
+    false
+  else
+    be cap sandbox deploy:hot SANDBOX_DOMAIN="$@"
+  fi
+}
