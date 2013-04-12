@@ -21,6 +21,8 @@ alias gc='git commit'
 alias gcm='git commit -m'
 alias gcam='git commit -am'
 alias gl='git log --pretty=oneline --abbrev-commit --decorate'
+#alias glf="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glf="git log --pretty=format:'%C(yellow)%h%Creset %s %Cgreen%cr %C(blue)%an%Creset' --abbrev-commit"
 
 ##### Rails related shortcuts
 alias ss=script/server

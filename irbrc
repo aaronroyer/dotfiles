@@ -6,9 +6,13 @@ require 'rubygems'
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:PROMPT_MODE]  = :SIMPLE
 
-require 'irb/ext/save-history'
-IRB.conf[:SAVE_HISTORY] = 100
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
+begin
+  # Loading this can fail with MacRuby
+  require 'irb/ext/save-history'
+  IRB.conf[:SAVE_HISTORY] = 100
+  IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
+rescue LoadError
+end
 
 def aws_s3_connect
   require 'aws/s3'

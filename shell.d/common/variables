@@ -35,7 +35,12 @@ export LESS='iMRw'
 
 export RLWRAP_HOME=~/.rlwrap
 
+# Is the following line old?
 export NODE_PATH=/usr/local/lib/node_modules
+
+#
+export NPM_BIN_PATH=/usr/local/share/npm/bin
+export PATH="$NPM_BIN_PATH:$PATH"
 
 # VOX
 export SOLR_HOME=~/Projects/pro/solr14

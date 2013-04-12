@@ -29,17 +29,23 @@ prompt_user_and_host() {
 prompt_ruby() {
 	local version_string
 	if which rbenv &> /dev/null; then
-		version_string=$(rbenv version-name)
-		case ${version_string%-*} in
-		  1.8.6)  version_string="❻"  ;;
-		  1.8.7)  version_string="❼"  ;;
-		  1.9.1)  version_string="❶"  ;;
-		  1.9.2)  version_string="❷"  ;;
-		  1.9.3)  version_string="❸"  ;;
+		version_string=$(rbenv version-name | cut -d- -f1)
+		case $version_string in
+			ree)    version_string="✈"  ;;
+			#ree)    version_string="🚀"  ;;
+		  1.8.6)  version_string="➇❻"  ;;
+		  1.8.7)  version_string="➇❼"  ;;
+		  1.9.1)  version_string="➈❶"  ;;
+		  1.9.2)  version_string="➈❷"  ;;
+		  1.9.3)  version_string="➈❸"  ;;
+			2.0.0)  version_string="❷"  ;;
+		  system)  version_string="➆"  ;;
 		  *)      version_string="♢"  ;;
 		esac
 	fi
-	[[ -n "$version_string" ]] && echo " $version_string "
+	if [[ -n "$version_string" ]] then
+		echo "$PR_RED $version_string $PR_NO_COLOR"
+	fi
 }
 
 prompt_git() {
@@ -66,4 +72,4 @@ prompt_svn() {
 
 #PS1="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%~ %{$reset_color%}%% "
 
-PS1='%{$bold_color%}$(prompt_user_and_host)%{$reset_color%}%1~$(prompt_git)$(prompt_svn) %(?..[%?])%# '
+PS1='%{$bold_color%}$(prompt_user_and_host)%{$reset_color%}%1~$(prompt_git)$(prompt_svn)$(prompt_ruby)%(?..[%?])%# '

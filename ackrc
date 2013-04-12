@@ -3,3 +3,5 @@
 --type-set=erb=.erb
 --type-add=css=.scss
 --type-add=html=.html.erb
+
+--ignore-dir=public/cache
