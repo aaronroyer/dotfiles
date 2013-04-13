@@ -1,6 +1,7 @@
 --smart-case
 --type-set=json=.json
 --type-set=erb=.erb
+--type-set=coffee=.coffee
 --type-add=css=.scss
 --type-add=html=.html.erb
 
