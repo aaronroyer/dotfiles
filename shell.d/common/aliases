@@ -2,6 +2,9 @@
 alias mysql=/usr/local/mysql/bin/mysql
 alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 
+##### Heroku
+alias hc='heroku run rails console'
+
 ##### SSH shortcuts
 alias ssha='ssh aaronroyer@aaronroyer.com'
 alias sshk='ssh kristinroyer@kristinroyer.com'
@@ -23,6 +26,7 @@ alias gcam='git commit -am'
 alias gl='git log --pretty=oneline --abbrev-commit --decorate'
 #alias glf="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glf="git log --pretty=format:'%C(yellow)%h%Creset %s %Cgreen%cr %C(blue)%an%Creset' --abbrev-commit"
+alias glg="git log --graph --pretty=oneline --abbrev-commit"
 
 ##### Rails related shortcuts
 alias ss=script/server
@@ -59,6 +63,7 @@ for n in 2 3 4 5 6 7 8 9; do eval alias "$n='cd +$n'"; done
 for n in 0 1 2 3 4 5 6 7 8 9; do eval alias "d$n='d $n'"; done
 
 ##### Networking
+# Has the following option been renamed to -sn ?
 alias pingsweep='nmap -sP 192.168.1.0-255'
 # Next 3 from https://github.com/mathiasbynens/dotfiles/blob/master/.aliases
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

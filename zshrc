@@ -1,6 +1,6 @@
 
 # General shell config
-fpath=(~/.shell.d/zsh/functions $fpath)
+fpath=(~/.shell.d/zsh/functions /usr/local/share/zsh/site-functions $fpath)
 autoload -U ~/.shell.d/zsh/functions/*(:t)
 
 setopt auto_pushd
