@@ -1,0 +1,13 @@
+
+active_network_interface() {
+  route get 0.0.0.0 2>/dev/null | awk '/interface: / {print $2}'
+}
+
+local_ip() {
+  ipconfig getifaddr $(active_network_interface)
+}
+
+pingsweep() {
+  which nmap &> /dev/null || { echo "nmap must be installed and on your PATH" >&2; return 1; }
+  nmap -sP "$(local_ip | ruby -ne 'puts $_.sub /\d+$/, "0"')-255"
+}
