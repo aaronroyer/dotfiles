@@ -3,10 +3,14 @@
 fpath=(~/.shell.d/zsh/functions /usr/local/share/zsh/site-functions $fpath)
 autoload -U ~/.shell.d/zsh/functions/*(:t)
 
+setopt notify # notify right away when bg jobs exit, rather than when printing next prompt
+
 setopt auto_pushd
 #setopt pushd_silent # Need to silence pushd?
 setopt pushd_to_home # Use home when no arguments specified
 setopt pushd_ignoredups
+
+REPORTTIME=10 # Report CPU usage for commands running longer than 10 seconds
 
 ##### Key bindings
 # Next 2 require option to be set as meta key in Terminal (which also
