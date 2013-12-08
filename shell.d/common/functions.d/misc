@@ -25,8 +25,8 @@ fi
 # Opens xcworkspace file if exists, otherwise opens xcodeproj file.
 # Returns 0 if a project is found, 1 otherwise.
 x() {
-  local project=$(ls | grep ".*\.xcworkspace$")
-  [[ -z $project ]] && project=$(ls | grep ".*\.xcodeproj$")
+  local project="$(ls | grep '.*\.xcworkspace$')"
+  [[ -z $project ]] && project="$(ls | grep '.*\.xcodeproj$')"
   if [[ -n $project ]]; then
     open $project
   else
