@@ -73,6 +73,11 @@ alias dotfiles='git --git-dir=$HOME/Dropbox/dotfiles/.git/ --work-tree=$HOME/Dro
 alias rp='ruku pause'
 alias simple_server='python -m SimpleHTTPServer 8000'
 
+##### Filtering, grepping
+
+# Filter all but specific lines from stdin
+for n in 0 1 2 3 4 5 6 7 8 9; do eval alias "l$n='sed -n ${n}p'"; done
+
 ##### Mac-specific stuff
 alias openports='sudo lsof -iTCP -sTCP:LISTEN -P'
 # http://superuser.com/questions/52483/terminal-tips-and-tricks-for-mac-os-x

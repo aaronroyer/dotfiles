@@ -1,5 +1,7 @@
 
 # General shell config
+# zsh options docs: http://zsh.sourceforge.net/Doc/Release/Options.html
+
 fpath=(~/.shell.d/zsh/functions /usr/local/share/zsh/site-functions $fpath)
 autoload -U ~/.shell.d/zsh/functions/*(:t)
 
@@ -9,6 +11,9 @@ setopt auto_pushd
 #setopt pushd_silent # Need to silence pushd?
 setopt pushd_to_home # Use home when no arguments specified
 setopt pushd_ignoredups
+
+setopt inc_append_history # write to the history file right away instead of when shell exits
+setopt hist_ignore_dups   # ignore consecutive dups
 
 REPORTTIME=10 # Report CPU usage for commands running longer than 10 seconds
 

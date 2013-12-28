@@ -57,10 +57,6 @@ export HISTFILESIZE=3000
 export SAVEHIST=$HISTFILESIZE
 export HISTIGNORE="ls:cd:exit:ll:clear:pwd"
 
-# zsh options docs: http://zsh.sourceforge.net/Doc/Release/Options.html
-setopt inc_append_history # write to the history file right away instead of when shell exits
-setopt hist_ignore_dups   # ignore consecutive dups
-
 # Detect SSH
 if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_TTY" ]]; then
   SESSION_TYPE=remote/ssh
