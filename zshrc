@@ -3,6 +3,7 @@
 # zsh options docs: http://zsh.sourceforge.net/Doc/Release/Options.html
 
 fpath=(~/.shell.d/zsh/functions /usr/local/share/zsh/site-functions $fpath)
+which brew &> /dev/null && fpath=("$(brew --prefix)/share/zsh-completions" $fpath)
 autoload -U ~/.shell.d/zsh/functions/*(:t)
 
 setopt notify # notify right away when bg jobs exit, rather than when printing next prompt
