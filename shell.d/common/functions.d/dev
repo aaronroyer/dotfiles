@@ -1,9 +1,0 @@
-
-# Checkout last git branch, as grepped out of the reflog
-# TODO fix; doesn't always work correctly
-glb() {
-  local last_branch=$(git reflog | grep checkout | head -1 | ruby -e 'STDIN.read =~ /from ([\w\d_\-]*)/; puts $1')
-  [[ -z "$last_branch" ]] && return 1
-  echo "Checking out last branch: $last_branch"
-  git co $last_branch
-}

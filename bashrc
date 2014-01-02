@@ -1,23 +1,32 @@
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+	source /etc/bashrc
 fi
 
-# Load common shell stuff
-for f in variables aliases functions; do
-	if [ -f ~/.shell.d/common/$f ]; then
-		. ~/.shell.d/common/$f
-	fi
-done
+COMMON_DIR=~/.shell.d/common
+BASH_DIR=~/.shell.d/bash
 
-# Load bash specific stuff
-for f in completion prompt; do
-	if [ -f ~/.shell.d/bash/$f ]; then
-		. ~/.shell.d/bash/$f
-	fi
-done
+
+##### Common shell stuff
+
+source $COMMON_DIR/path.sh
+source $COMMON_DIR/misc_variables.sh
+# Load shy plugin manager; if not present, then shim it
+if which shy &> /dev/null; then
+  eval "$(shy init)"
+else
+  shy() { [ "$1" = 'load' ] && source "$2"; }
+fi
+source $COMMON_DIR/plugins.sh
+
+
+##### bash specific stuff
+
+source $BASH_DIR/completion
+source $BASH_DIR/prompt
+
+unset COMMON_DIR BASH_DIR
+
 
 ##### General shell config
 
 set bell-style visible
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

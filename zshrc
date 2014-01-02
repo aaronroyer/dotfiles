@@ -2,10 +2,6 @@
 # General shell config
 # zsh options docs: http://zsh.sourceforge.net/Doc/Release/Options.html
 
-fpath=(~/.shell.d/zsh/functions /usr/local/share/zsh/site-functions $fpath)
-which brew &> /dev/null && fpath=("$(brew --prefix)/share/zsh-completions" $fpath)
-autoload -U ~/.shell.d/zsh/functions/*(:t)
-
 setopt notify # notify right away when bg jobs exit, rather than when printing next prompt
 
 setopt auto_pushd
@@ -32,18 +28,31 @@ zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 
 
-# Load common shell stuff
-for f in variables aliases functions; do
-	if [ -f ~/.shell.d/common/$f ]; then
-		source ~/.shell.d/common/$f
-	fi
-done
+COMMON_DIR=~/.shell.d/common
+ZSH_DIR=~/.shell.d/zsh
 
-# Load zsh specific stuff
-for f in prompt completion; do
-	if [ -f ~/.shell.d/zsh/$f ]; then
-		source ~/.shell.d/zsh/$f
-	fi
-done
 
-# Config ideas: https://github.com/sorin-ionescu/oh-my-zsh/blob/master/modules/environment/init.zsh
+# Various PATHs
+source $COMMON_DIR/path.sh
+fpath=(~/.shell.d/zsh/functions /usr/local/share/zsh/site-functions $fpath)
+which brew &> /dev/null && fpath=("$(brew --prefix)/share/zsh-completions" $fpath)
+autoload -U ~/.shell.d/zsh/functions/*(:t)
+
+
+# Common shell stuff
+
+source $COMMON_DIR/misc_variables.sh
+
+# Load shy plugin manager; if not present, then shim it
+if which shy &> /dev/null; then
+  eval "$(shy init)"
+else
+  shy() { [ "$1" = 'load' ] && source "$2"; }
+fi
+source $COMMON_DIR/plugins.sh
+
+# zsh specific stuff
+source $ZSH_DIR/prompt
+source $ZSH_DIR/completion
+
+unset COMMON_DIR ZSH_DIR
