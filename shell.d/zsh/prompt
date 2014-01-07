@@ -32,13 +32,13 @@ prompt_ruby() {
 		version_string=$(rbenv version-name | cut -d- -f1)
 		case $version_string in
 			ree)    version_string="✈"  ;;
-			#ree)    version_string="🚀"  ;;
 		  1.8.6)  version_string="➇❻"  ;;
 		  1.8.7)  version_string="➇❼"  ;;
 		  1.9.1)  version_string="➈❶"  ;;
 		  1.9.2)  version_string="➈❷"  ;;
 		  1.9.3)  version_string="➈❸"  ;;
 			2.0.0)  version_string="❷"  ;;
+			2.1.0)  version_string="❷➀"  ;;
 		  system)  version_string="➆"  ;;
 		  *)      version_string="♢"  ;;
 		esac
