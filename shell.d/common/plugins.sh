@@ -1,8 +1,4 @@
 
-PLUGINS_DIR=$COMMON_DIR/plugins
-
-for plugin in $(ls $PLUGINS_DIR); do
-  shy load "$PLUGINS_DIR/$plugin"
+for plugin in $COMMON_DIR/plugins/*; do
+  shy load $plugin
 done
-
-unset PLUGINS_DIR
