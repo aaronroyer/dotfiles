@@ -4,7 +4,6 @@ export PROJECT_DIRS=~/Projects/pro:~/Projects/personal
 
 export DOTFILES_DIR=~/Dropbox/dotfiles
 
-# Misc config
 export EDITOR="subl -w"
 export LESS='iMRw'
 

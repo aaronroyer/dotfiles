@@ -38,7 +38,7 @@ prompt_ruby() {
 		  1.9.2)  version_string="➈❷"  ;;
 		  1.9.3)  version_string="➈❸"  ;;
 			2.0.0)  version_string="❷"  ;;
-			2.1.0)  version_string="❷➀"  ;;
+			2.1*)  version_string="❷➀"  ;;
 		  system)  version_string="➆"  ;;
 		  *)      version_string="♢"  ;;
 		esac

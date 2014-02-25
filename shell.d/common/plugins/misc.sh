@@ -55,7 +55,7 @@ for n in 0 1 2 3 4 5 6 7 8 9; do eval alias "l$n='sed -n ${n}p'"; done
 
 ##### Shell and dotfile management
 
-alias dotfiles='git --git-dir=$HOME/Dropbox/dotfiles/.git/ --work-tree=$HOME/Dropbox/dotfiles/'
+alias dotfiles='git --git-dir=$DOTFILES_DIR/.git/ --work-tree=$DOTFILES_DIR'
 
 reload_shell() {
   local rc_file=~/.zshrc
@@ -66,7 +66,7 @@ reload_shell() {
 }
 
 dotfiles_project() {
-  subl $HOME/Dropbox/dotfiles
+  subl $DOTFILES_DIR
 }
 
 # Make symlink dotfiles in HOME to the regular files in Dropbox.
