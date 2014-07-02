@@ -52,7 +52,8 @@ fi
 source $COMMON_DIR/plugins.sh
 
 # zsh specific stuff
-source $ZSH_DIR/prompt
-source $ZSH_DIR/completion
+# source $ZSH_DIR/prompt.zsh
+source $ZSH_DIR/new_prompt.zsh
+source $ZSH_DIR/completion.zsh
 
 unset COMMON_DIR ZSH_DIR
