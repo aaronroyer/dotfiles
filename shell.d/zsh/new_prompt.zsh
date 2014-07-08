@@ -137,8 +137,10 @@ prompt_arr_setup() {
   # pc[scm_status_staged]='Green'
 
   pc[scm_status_clean]='Cyan'
-  pc[scm_status_dirty]='Yellow'
   pc[scm_status_staged]='Green'
+  pc[scm_status_dirty]='Yellow'
+  pc[scm_status_untracked]='Red'
+  pc[status]='Red'
 
   pc[#]='Yellow'
   for cn in ${(k)pc}; do
@@ -149,7 +151,8 @@ prompt_arr_setup() {
   typeset -Ag wunjo_prompt_colors
   wunjo_prompt_colors=(${(kv)pc})
 
-  PROMPT="%1~\$(prompt_arr_scm_branch)$(prompt_ruby)%(?..[%?])%# "
+  PROMPT="%1~\$(prompt_arr_scm_branch)$(prompt_ruby)%(?..[$pc[status]%?$pc[reset]])%# "
+  # RPROMPT="\$(prompt_scm_change_stats)"
 
   export PROMPT
   add-zsh-hook precmd prompt_wunjo_precmd
@@ -167,6 +170,39 @@ prompt_wunjo_precmd() {
   fi
 }
 
+# prompt_arr_scm_branch() {
+#   zgit_isgit || return
+#   local -A pc
+#   pc=(${(kv)wunjo_prompt_colors})
+
+#   echo -n ' '
+
+#   local branch_color=$pc[scm_status_clean]
+#   local -a dirty
+
+#   if zgit_inworktree; then
+#     local staged=
+#     zgit_isindexclean || staged=+
+
+#     zgit_hasuntracked && dirty+='?'
+#     zgit_isworktreeclean || dirty+='!'
+#     zgit_hasunmerged && dirty+='*'
+
+#     if [ $#dirty -gt 0 ]; then
+#       branch_color=$pc[scm_status_dirty]
+#     elif [ -n "$staged" ]; then
+#       branch_color=$pc[scm_status_staged]
+#     fi
+#   fi
+
+#   echo -n "$branch_color$(zgit_head)$pc[reset]$staged${(j::)dirty}"
+#   if [ -n "$(zgit_tracking_remote)" ];then
+#     echo -n "📡 "
+#   else
+#     # echo -n "🆕 "
+#   fi
+# }
+
 prompt_arr_scm_branch() {
   zgit_isgit || return
   local -A pc
@@ -174,30 +210,64 @@ prompt_arr_scm_branch() {
 
   echo -n ' '
 
-  local branch_color=$pc[scm_status_clean]
-  local -a dirty
+  local diff_stats no_remote untracked branch_color=$pc[scm_status_clean]
 
   if zgit_inworktree; then
-    local staged=
-    zgit_isindexclean || staged=+
 
-    zgit_hasuntracked && dirty+='?'
-    zgit_isworktreeclean || dirty+='!'
-    zgit_hasunmerged && dirty+='*'
-
-    if [ $#dirty -gt 0 ]; then
+    if zgit_hasuntracked; then
+      branch_color=$pc[scm_status_untracked]
+    elif ! zgit_isworktreeclean; then
       branch_color=$pc[scm_status_dirty]
-    elif [ -n "$staged" ]; then
+    elif ! zgit_isindexclean; then
       branch_color=$pc[scm_status_staged]
     fi
+
+    diff_stats="$(prompt_scm_diff_stats both)"
+    [ -n "$diff_stats" ] && diff_stats="[$diff_stats]"
+    untracked=$(git ls-files --others --exclude-standard)
+    [ -n "$untracked" ] && diff_stats="$diff_stats(+$(echo $untracked | wc -l | tr -d ' '))"
+    zgit_tracking_remote &> /dev/null || no_remote="🆕 "
+    # 📄 📡
   fi
 
-  echo -n "$branch_color$(zgit_head)$pc[reset]$staged${(j::)dirty}"
-  if [ -n "$(zgit_tracking_remote)" ];then
-    echo -n "📡 "
+  echo -n "$branch_color$(zgit_head)$pc[reset]$no_remote$diff_stats"
+}
+
+prompt_scm_diff_stats() {
+  zgit_isgit || return
+  local adds subs stats diff_output
+
+  if [ "$1" = "both" ]; then
+    diff_output="$(git diff --numstat)$(git diff --cached --numstat)"
+  elif [ "$1" = "cached" ]; then
+    diff_output=$(git diff --cached --numstat)
   else
-    # echo -n "🆕 "
+    diff_output=$(git diff --numstat)
   fi
+  adds=$(echo $diff_output | cut -f1 | awk '{x+=$0}END{print x}')
+  subs=$(echo $diff_output | cut -f2 | awk '{x+=$0}END{print x}')
+
+  if [ "$adds" -gt 0 ]; then
+    local addstext
+    if [ "$adds" -lt 6 ]; then
+      addstext=$(printf %${adds}s | tr " " "+")
+    else
+      addstext="+${adds}"
+    fi
+    stats="$PR_GREEN$addstext$PR_NO_COLOR"
+  fi
+
+  if [ "$subs" -gt 0 ]; then
+    local substext
+    if [ "$subs" -lt 6 ]; then
+      substext=$(printf %${subs}s |tr " " "-")
+    else
+      substext="-${subs}"
+    fi
+    stats="$stats$PR_RED$substext$PR_NO_COLOR"
+  fi
+
+  echo $stats
 }
 
 prompt_arr_setup "$@"
