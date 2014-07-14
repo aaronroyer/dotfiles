@@ -15,6 +15,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
+Plugin 'rking/ag.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'kchmck/vim-coffee-script'
+"Plugin 'fatih/vim-go'
 
 call vundle#end()          "required for Vundle
 filetype plugin indent on  " load file type plugins + indentation
@@ -77,3 +81,8 @@ syntax enable
 "colorscheme solarized
 colorscheme base16-railscasts
 set background=dark
+
+""" Plugin config
+
+" Ag
+let g:agprg="ag --column --smart-case"
