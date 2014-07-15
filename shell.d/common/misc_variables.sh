@@ -4,7 +4,10 @@ export PROJECT_DIRS=~/Projects/pro:~/Projects/personal
 
 export DOTFILES_DIR=~/Dropbox/dotfiles
 
-export EDITOR="subl -w"
+export EDITOR=vim
+# GNU Screen sets -o vi if EDITOR=vi, so we have to force it back
+set -o emacs
+
 export LESS='iMRw'
 
 # Are the following old?
