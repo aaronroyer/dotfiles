@@ -18,9 +18,11 @@ Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'kchmck/vim-coffee-script'
-"Plugin 'fatih/vim-go'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'fatih/vim-go'
 
-call vundle#end()          "required for Vundle
+call vundle#end()          " required for Vundle
 filetype plugin indent on  " load file type plugins + indentation
 
 syntax on
@@ -47,6 +49,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Open new splits on bottom
+" set splitbelow
+
 " Whitespace
 set nowrap " don't wrap lines
 set tabstop=2 shiftwidth=2 " a tab is two spaces
@@ -65,8 +70,8 @@ set smartcase  " ...unless they contain at least one capital letter
 let g:airline_powerline_fonts = 1
 set laststatus=2 " Always show status bar
 
-set list
-set listchars=tab:>-,trail:·,extends:❯,precedes:❮ " show tabs and trailing
+set list " show hidden characters
+set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮ " show tabs and trailing
 set number " turn on line numbers
 set ruler " Always show current positions along the bottom
 set scrolloff=5 " some context around current line always on screen

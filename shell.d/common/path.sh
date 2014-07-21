@@ -25,5 +25,8 @@ puniq () {
 PATH=~/bin:~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
 #MANPATH=/opt/local/share/man:$MANPATH
 
+[[ -d ~/.tmpbin ]] && PATH=$PATH:~/.tmpbin
+[[ -d "$GOPATH" ]] && PATH=$PATH:$GOPATH/bin
+
 export PATH=$(puniq $PATH)
 #export MANPATH=$(puniq $MANPATH)
