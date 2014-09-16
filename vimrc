@@ -105,16 +105,9 @@ if has("wildmenu")
 endif
 
 """ UI - colors
-" set term=xterm
-" set term=screen-256color
-" set t_Co=256
-" let &t_AB="\e[48;5;%dm"
-" let &t_AF="\e[38;5;%dm"
 let base16colorspace=256
 colorscheme base16-default
-" colorscheme base16-railscasts
 set background=dark
-" highlight LineNr ctermfg=grey ctermbg=black
 
 """ Plugin config
 let g:airline_powerline_fonts = 1

@@ -27,6 +27,8 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 
+# Proper 256 color setup
+. ~/.shell.d/base16-shell/base16-default.dark.sh
 
 COMMON_DIR=~/.shell.d/common
 ZSH_DIR=~/.shell.d/zsh
