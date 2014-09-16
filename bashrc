@@ -30,3 +30,6 @@ unset COMMON_DIR BASH_DIR
 ##### General shell config
 
 set bell-style visible
+
+# Do not intercept Ctrl-S and Ctrl-Q for legacy functionality
+stty -ixon

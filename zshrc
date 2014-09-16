@@ -57,3 +57,7 @@ source $ZSH_DIR/new_prompt.zsh
 source $ZSH_DIR/completion.zsh
 
 unset COMMON_DIR ZSH_DIR
+
+
+# Do not intercept Ctrl-S and Ctrl-Q for legacy functionality
+stty -ixon
