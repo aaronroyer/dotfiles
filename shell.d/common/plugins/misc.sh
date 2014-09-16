@@ -1,6 +1,6 @@
 # Miscellaneous stuff that doesn't seem to belong elsewhere
 
-alias simple_server='python -m SimpleHTTPServer 8000'
+alias simple_server='ruby -run -e httpd -- . -p 8000'
 
 
 # Display a man page in Preview

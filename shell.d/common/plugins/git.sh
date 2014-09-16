@@ -9,6 +9,8 @@ alias gl='git log --pretty=oneline --abbrev-commit --decorate'
 alias glf="git log --pretty=format:'%C(yellow)%h%Creset %s %Cgreen%cr %C(blue)%an%Creset' --abbrev-commit"
 alias glg="git log --graph --pretty=oneline --abbrev-commit"
 
+# alias ccb="git rev-parse --abbrev-ref HEAD | tr -d '\n' | pbcopy"
+
 # Checkout last git branch, as grepped out of the reflog
 # TODO fix; doesn't always work correctly
 glb() {
