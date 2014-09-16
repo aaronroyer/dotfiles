@@ -27,3 +27,5 @@
 	user = aaronroyer
 [push]
 	default = upstream
+[rerere]
+	enabled = true
