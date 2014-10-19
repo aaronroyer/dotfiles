@@ -12,10 +12,12 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-endwise'
+Plugin 'ervandew/supertab'
 " Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'vim-ruby/vim-ruby'
@@ -49,25 +51,31 @@ let mapleader=","
 nnoremap <leader><leader> <C-^>
 " Search for tags with ctrlp
 nnoremap <leader>t :CtrlPTag<cr>
+" Search open buffers with ctrlp
+nnoremap <leader>p :CtrlPBuffer<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
 " maybe easier way to turn off highlight after search
 nnoremap <leader>h :nohl<CR>
 " Toggle NERDTree
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeTabsToggle<CR>
 " Easier split navigations - http://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-map <leader>r <C-w>r " Rotate splits
+" Rotate splits
+map <leader>r <C-w>r
 " Inserting newlines
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 " nnoremap ; : " use ; to start commands
 " Custom functions
 map <leader>n :call RenameFile()<cr>
+" Clipboard
+map <leader>c "*y
 " Misc
-map <leader>b obinding.pry<Esc>
-map <leader>B Obinding.pry<Esc>
+map <leader>d obinding.pry<Esc>
+map <leader>D Obinding.pry<Esc>
 
 " Open new splits on bottom
 " set splitbelow
@@ -92,7 +100,7 @@ set laststatus=2 " Always show status bar
 set list " show hidden characters
 set listchars=tab:▸\ ,trail:·,extends:❯,precedes:❮ " show tabs and trailing
 set number " turn on line numbers
-set ruler " Always show current positions along the bottom
+set ruler " always show current positions along the bottom
 set scrolloff=5 " some context around current line always on screen
 
 " Highlight the character of a line that goes over 100
@@ -112,6 +120,17 @@ set background=dark
 """ Plugin config
 let g:airline_powerline_fonts = 1
 let g:agprg="ag --column --smart-case"
+
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 """ Language-specific whitespace config (if autocmd is available)
 " ts  - tabstop (number of columns for a tab)
