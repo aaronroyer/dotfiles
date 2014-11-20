@@ -152,7 +152,7 @@ prompt_arr_setup() {
   typeset -Ag wunjo_prompt_colors
   wunjo_prompt_colors=(${(kv)pc})
 
-  PROMPT="%1~\$(prompt_arr_scm_branch)%(?..[$pc[status]%?$pc[reset]]) %(1j.$pc[jobs][%j]$pc[reset].)%# "
+  PROMPT="%1~\$(prompt_arr_scm_branch) %(1j.$pc[jobs][%j]$pc[reset].)%(?..[$pc[status]%?$pc[reset]])%# "
   # RPROMPT="\$(prompt_scm_change_stats)"
 
   export PROMPT
