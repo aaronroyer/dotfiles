@@ -136,6 +136,7 @@ prompt_arr_setup() {
   # pc[scm_status_dirty]='Red'
   # pc[scm_status_staged]='Green'
 
+  pc[jobs]='magenta'
   pc[scm_status_clean]='Cyan'
   pc[scm_status_staged]='Green'
   pc[scm_status_dirty]='Yellow'
@@ -151,7 +152,7 @@ prompt_arr_setup() {
   typeset -Ag wunjo_prompt_colors
   wunjo_prompt_colors=(${(kv)pc})
 
-  PROMPT="%1~\$(prompt_arr_scm_branch)$(prompt_ruby)%(?..[$pc[status]%?$pc[reset]])%# "
+  PROMPT="%1~\$(prompt_arr_scm_branch)%(?..[$pc[status]%?$pc[reset]]) %(1j.$pc[jobs][%j]$pc[reset].)%# "
   # RPROMPT="\$(prompt_scm_change_stats)"
 
   export PROMPT
