@@ -171,39 +171,6 @@ prompt_wunjo_precmd() {
   fi
 }
 
-# prompt_arr_scm_branch() {
-#   zgit_isgit || return
-#   local -A pc
-#   pc=(${(kv)wunjo_prompt_colors})
-
-#   echo -n ' '
-
-#   local branch_color=$pc[scm_status_clean]
-#   local -a dirty
-
-#   if zgit_inworktree; then
-#     local staged=
-#     zgit_isindexclean || staged=+
-
-#     zgit_hasuntracked && dirty+='?'
-#     zgit_isworktreeclean || dirty+='!'
-#     zgit_hasunmerged && dirty+='*'
-
-#     if [ $#dirty -gt 0 ]; then
-#       branch_color=$pc[scm_status_dirty]
-#     elif [ -n "$staged" ]; then
-#       branch_color=$pc[scm_status_staged]
-#     fi
-#   fi
-
-#   echo -n "$branch_color$(zgit_head)$pc[reset]$staged${(j::)dirty}"
-#   if [ -n "$(zgit_tracking_remote)" ];then
-#     echo -n "📡 "
-#   else
-#     # echo -n "🆕 "
-#   fi
-# }
-
 prompt_arr_scm_branch() {
   zgit_isgit || return
   local -A pc
@@ -248,25 +215,8 @@ prompt_scm_diff_stats() {
   adds=$(echo $diff_output | cut -f1 | awk '{x+=$0}END{print x}')
   subs=$(echo $diff_output | cut -f2 | awk '{x+=$0}END{print x}')
 
-  if [ "$adds" -gt 0 ]; then
-    local addstext
-    if [ "$adds" -lt 6 ]; then
-      addstext=$(printf %${adds}s | tr " " "+")
-    else
-      addstext="+${adds}"
-    fi
-    stats="$PR_GREEN$addstext$PR_NO_COLOR"
-  fi
-
-  if [ "$subs" -gt 0 ]; then
-    local substext
-    if [ "$subs" -lt 6 ]; then
-      substext=$(printf %${subs}s |tr " " "-")
-    else
-      substext="-${subs}"
-    fi
-    stats="$stats$PR_RED$substext$PR_NO_COLOR"
-  fi
+  [ "$adds" -gt 0 ] && stats="$PR_GREEN+$adds$PR_NO_COLOR"
+  [ "$subs" -gt 0 ] && stats="$stats${PR_RED}-$subs$PR_NO_COLOR"
 
   echo $stats
 }
