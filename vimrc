@@ -8,6 +8,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
 
 Plugin 'kien/ctrlp.vim'
+Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
@@ -18,6 +19,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'terryma/vim-expand-region'
 Plugin 'tpope/vim-endwise'
 Plugin 'ervandew/supertab'
+" Plugin 'scrooloose/syntastic'
 " Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'vim-ruby/vim-ruby'
@@ -53,7 +55,8 @@ nnoremap <leader><leader> <C-^>
 nnoremap <leader>t :CtrlPTag<cr>
 " Search open buffers with ctrlp
 nnoremap <leader>p :CtrlPBuffer<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
+let g:buffergator_suppress_keymaps="1"
+nnoremap <leader>b :BuffergatorToggle<cr>
 " maybe easier way to turn off highlight after search
 nnoremap <leader>h :nohl<CR>
 " Toggle NERDTree
