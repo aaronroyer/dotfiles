@@ -33,3 +33,5 @@ set bell-style visible
 
 # Do not intercept Ctrl-S and Ctrl-Q for legacy functionality
 stty -ixon
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

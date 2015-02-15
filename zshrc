@@ -63,3 +63,5 @@ unset COMMON_DIR ZSH_DIR
 
 # Do not intercept Ctrl-S and Ctrl-Q for legacy functionality
 stty -ixon
+
+which fzf &> /dev/null && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
