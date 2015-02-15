@@ -10,9 +10,6 @@ set -o emacs
 
 export LESS='iMRw'
 
-# Go
-export GOPATH=~/go
-
 # Are the following old?
 export NODE_PATH=/usr/local/lib/node_modules
 export NPM_BIN_PATH=/usr/local/share/npm/bin

@@ -26,7 +26,13 @@ PATH=~/bin:~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/loc
 #MANPATH=/opt/local/share/man:$MANPATH
 
 [[ -d ~/.tmpbin ]] && PATH=$PATH:~/.tmpbin
-[[ -d "$GOPATH" ]] && PATH=$PATH:$GOPATH/bin
+
+if which go &> /dev/null; then
+  export GOPATH=~/go
+  [[ -d "$GOPATH" ]] && PATH=$PATH:$GOPATH/bin
+  export GOROOT=`go env GOROOT`
+  PATH=$PATH:$GOROOT/bin
+fi
 
 export PATH=$(puniq $PATH)
 #export MANPATH=$(puniq $MANPATH)
