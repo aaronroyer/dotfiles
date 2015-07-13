@@ -32,3 +32,5 @@
 	enabled = true
 [init]
 	templatedir = ~/.git_template
+[git-up "bundler"]
+	check = true
