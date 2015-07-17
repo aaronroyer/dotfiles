@@ -1,59 +1,52 @@
 #!/usr/bin/env ruby
-begin
-  require 'rubygems'
-  require 'term/ansicolor'
-  extend Term::ANSIColor
-rescue LoadError
-  def green(txt); txt; end
-  alias :red :green
-  alias :yellow :green
-end
 
 dotfiles_dir = File.dirname(__FILE__)
 dotfiles_bin_dir = File.join(dotfiles_dir, 'bin')
 home_dir = ENV['HOME']
+abort '$HOME not set properly' unless File.exist?(home_dir)
+home_bin_dir = File.join(home_dir, 'bin')
 
-if not File.exist?(home_dir)
-  puts "Could not find home directory"
-  exit 1
-end
-
-def link_it(dotfiles_path, home_path)
-  home_base = File.basename(home_path)
-  if not File.exist?(home_path)
-    begin
-      File.symlink(dotfiles_path, home_path)
-      puts "Link created:     #{green home_base} -> #{dotfiles_path}"
-    rescue
-      puts red("Problem creating link: #{home_base} -> #{dotfiles_path}")
-    end
-  elsif File.symlink?(home_path)
-    if File.readlink(home_path) == dotfiles_path
-      puts "Linked properly:  #{green home_base}"
-    else
-      puts "Linked elsewhere: #{red home_base}"
-    end
-  else
-    puts "Regular file:     #{yellow home_base}"
+{ green: 32, yellow: 33, red: 31 }.each_pair do |color, ansi_code|
+  define_method(color) do |text|
+    "#{"\033[#{ansi_code}m" if $stdout.tty?}#{text}#{"\033[0m" if $stdout.tty?}"
   end
 end
 
-puts "Linking regular dotfiles..."
-# Link everything at the top level in the dotfiles dir except for the bin dir and this script
-Dir.entries(dotfiles_dir).reject{|f| f =~ /^\./ || f == File.basename(__FILE__) || f == 'bin'}.each do |f|
+def display(msg, file)
+  puts "%-17s %s" % ["#{msg}:", file]
+end
+
+def link_it(dotfiles_path, home_path)
+  name = File.basename(home_path)
+  if !File.exist?(home_path)
+    begin
+      File.symlink(dotfiles_path, home_path)
+      display('Link created', "#{green(name)} -> #{dotfiles_path}")
+    rescue
+      display('Symlink creation failed', "#{red(name)} -> #{dotfiles_path}")
+    end
+  elsif File.symlink?(home_path)
+    if File.readlink(home_path) == dotfiles_path
+      display('Linked properly', "#{green(name)}")
+    else
+      display('Linked elsewhere', "#{red(name)}")
+    end
+  else
+    display('Regular file', "#{yellow(name)}")
+  end
+end
+
+puts 'Linking dotfiles...'
+Dir.entries(dotfiles_dir).reject { |f| f =~ /^\./ || f == File.basename(__FILE__) || f == 'bin'}.each do |f|
   dotfiles_path = File.expand_path(File.join(dotfiles_dir, f))
   home_path = File.join(home_dir, ".#{f}")
   link_it(dotfiles_path, home_path)
 end
 
-home_bin_dir = File.join(home_dir, 'bin')
-if not File.exist?(home_bin_dir)
-  puts "No bin directory in #{home_dir}"
-  exit 1
-end
+puts "\nLinking bin scripts..."
+Dir.mkdir(home_bin_dir) unless File.exist?(home_bin_dir)
 
-puts "Linking synced bin scripts..."
-Dir.entries(dotfiles_bin_dir).reject{|f| f =~ /^\./ }.each do |f|
+Dir.entries(dotfiles_bin_dir).reject { |f| f =~ /^\./ }.each do |f|
   dotfiles_path = File.expand_path(File.join(dotfiles_bin_dir, f))
   home_path = File.join(home_bin_dir, f)
   link_it(dotfiles_path, home_path)

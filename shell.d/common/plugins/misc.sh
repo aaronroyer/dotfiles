@@ -14,21 +14,27 @@ hf() {
   grep "$@" ~/.zhistory
 }
 
+
+# Find (checked-in) files in current directory
+# TODO: make work without git?
+f() {
+  if [ -n "$1" ]; then
+    git ls-files | grep "$1"
+  else
+    git ls-files | fzf
+  fi
+}
+
 # search the directory frontmost in the Finder
 #posfind() { find "$(posd)" -name "*$1*"; }
 
 # grep the directory frontmost in the Finder
 #posgrep() { grep -iIrn "$1" "$(posd)"; }
 
-if is_osx; then
-  osx_setup() {
-    ~/.osx.d/osx_setup
-  }
-fi
 
 # Opens xcworkspace file if exists, otherwise opens xcodeproj file.
 # Returns 0 if a project is found, 1 otherwise.
-x() {
+xc() {
   local project="$(ls | grep '.*\.xcworkspace$')"
   [[ -z $project ]] && project="$(ls | grep '.*\.xcodeproj$')"
   if [[ -n $project ]]; then
