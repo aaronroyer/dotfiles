@@ -134,7 +134,7 @@ endif
 
 """ UI - colors
 let base16colorspace=256
-colorscheme base16-default
+colorscheme base16-aaronroyer
 set background=dark
 
 """ Plugin config
