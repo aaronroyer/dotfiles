@@ -19,6 +19,7 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-surround'
 Plugin 'ervandew/supertab'
 Plugin 'terryma/vim-expand-region'
 " Plugin 'scrooloose/syntastic'
@@ -55,7 +56,7 @@ set hidden
 " leave insert mode more easily
 " http://danielmiessler.com/study/vim/
 inoremap jk <ESC>
-" inoremap jj <ESC>
+inoremap jj <ESC>
 " easier to reach leader
 let mapleader=","
 " Switch between files quickly (<C-^> usually does this)
