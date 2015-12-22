@@ -27,9 +27,7 @@
 [github]
 	user = aaronroyer
 [push]
-	default = upstream
-[rerere]
-	enabled = true
+	default = current
 [init]
 	templatedir = ~/.git_template
 [git-up "bundler"]
