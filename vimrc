@@ -13,13 +13,13 @@ Plugin 'schickling/vim-bufonly'
 Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
 Plugin 'rking/ag.vim'
-" Plugin 'scrooloose/nerdtree'
-" Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'YankRing.vim' <- figure out how to not make it conflict with ctrlp
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'ervandew/supertab'
 Plugin 'terryma/vim-expand-region'
 " Plugin 'scrooloose/syntastic'
@@ -142,7 +142,11 @@ set background=dark
 let g:airline_powerline_fonts = 1
 
 if !empty($TMUX)
-  let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+  if executable('run_spec')
+    let g:rspec_command = 'call Send_to_Tmux("run_spec {spec}\n")'
+  else
+    let g:rspec_command = 'call Send_to_Tmux("rspec {spec}\n")'
+  endif
 endif
 
 if executable('ag')
@@ -150,11 +154,11 @@ if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 
-"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --ignore \.git -g ""'
 
-"   " ag is fast enough that CtrlP doesn't need to cache
-"   let g:ctrlp_use_caching = 0
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
 endif
 
 if executable('fzf')
