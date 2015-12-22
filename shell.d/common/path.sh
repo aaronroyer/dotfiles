@@ -22,7 +22,7 @@ puniq () {
   cut -f 2- | tr '\n' : | sed -e 's/:$//' -e 's/^://'
 }
 
-PATH=~/bin:~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
+PATH=~/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
 #MANPATH=/opt/local/share/man:$MANPATH
 
 [[ -d ~/.tmpbin ]] && PATH=$PATH:~/.tmpbin
