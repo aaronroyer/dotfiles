@@ -18,7 +18,7 @@ glb() {
   git co $last_branch
 }
 
-pt_story() {_
+pt_story() {
 local branch_name=$(git rev-parse --abbrev-ref HEAD)
   [ -z "$branch_name" ] && { echo "Not in a git repo" >&2; return 1; }
   local story_id=$(echo $branch_name | awk -F  "-" '/1/ {print $(NF)}')

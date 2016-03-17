@@ -22,7 +22,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'ervandew/supertab'
 Plugin 'terryma/vim-expand-region'
-" Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -176,6 +176,9 @@ nmap <Leader>g :TagbarToggle<CR>
 if has("autocmd")
   autocmd Filetype go setlocal ts=4 sw=4 sts=0 noexpandtab
 endif
+
+let g:syntastic_javascript_checkers = ["eslint"]
+let g:syntastic_ruby_mri_exec = '~/.rbenv/shims/ruby'
 
 """Functions
 
