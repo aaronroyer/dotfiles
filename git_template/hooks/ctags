@@ -1,8 +1,19 @@
 #!/bin/sh
 set -e
+
 PATH="/usr/local/bin:$PATH"
-dir="`git rev-parse --git-dir`"
-trap 'rm -f "$dir/$$.tags"' EXIT
-git ls-files | \
-  ctags --tag-relative -L - -f"$dir/$$.tags" --languages=-javascript,sql
-mv "$dir/$$.tags" "$dir/tags"
+git_dir="$(git rev-parse --git-dir)"
+
+trap 'rm -f "$git_dir/$$.tags"' EXIT
+
+# ripper-tags shim may be on PATH but could still crash if not installed for latest ruby version in rbenv
+if which ripper-tags &> /dev/null && ripper-tags --version &> /dev/null; then
+  pushd "$(git rev-parse --show-toplevel)" > /dev/null
+  # Get .git dir again, since it could have been relative
+  ripper-tags -R --tag-relative -f "$(git rev-parse --git-dir)/$$.tags" --exclude=vendor
+  popd > /dev/null
+else
+  git ls-files | ctags --tag-relative -L - -f"$git_dir/$$.tags" --languages=-javascript,sql
+fi
+
+mv "$git_dir/$$.tags" "$git_dir/tags"
