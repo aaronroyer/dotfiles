@@ -138,6 +138,12 @@ let base16colorspace=256
 colorscheme base16-aaronroyer
 set background=dark
 
+""" Folding
+set foldmethod=indent " fold based on indent
+set foldnestmax=10 " deepest fold is 10 levels
+set nofoldenable " do not fold by default
+set foldlevel=1 " level to fold to at top level
+
 """ Plugin config
 let g:airline_powerline_fonts = 1
 
