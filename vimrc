@@ -29,14 +29,13 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'editorconfig/editorconfig-vim'
 
 " Language support plugins
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'fatih/vim-go'
+Plugin 'sheerun/vim-polyglot'
 
 " Tool/framework support plugins
 Plugin 'tpope/vim-rails'
 " Plugin 'tpope/vim-bundler'
-Plugin 'thoughtbot/vim-rspec'
+" Plugin 'thoughtbot/vim-rspec'
+Plugin 'janko-m/vim-test'
 
 call vundle#end()
 
@@ -94,9 +93,17 @@ map <leader>d obinding.pry<Esc>
 map <leader>D Obinding.pry<Esc>
 
 " vim-rspec mappings
-nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>s :call RunNearestSpec()<CR>
-nnoremap <Leader>l :call RunLastSpec()<CR>
+" nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
+" nnoremap <Leader>s :call RunNearestSpec()<CR>
+" nnoremap <Leader>l :call RunLastSpec()<CR>
+
+let test#strategy = "tslime"
+let g:test#preserve_screen = 1
+" vim-test mappings
+nmap <silent> <leader>s :TestNearest<CR>
+nmap <silent> <leader>t :TestFile<CR>
+nmap <silent> <leader>l :TestLast<CR>
+" nmap <silent> <leader>g :TestVisit<CR>
 
 " Open new splits on bottom
 " set splitbelow
