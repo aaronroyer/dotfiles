@@ -181,6 +181,9 @@ endif
 " nmap <Leader>g :TagbarOpenAutoClose<CR>
 nmap <Leader>g :TagbarToggle<CR>
 
+" The polyglot YAML pack doesn't always highlight correctly
+let g:polyglot_disabled = ['yaml']
+
 """ Language-specific whitespace config (if autocmd is available)
 " ts  - tabstop (number of columns for a tab)
 " sw  - shiftwidth (number of columns for reindent operations, like << and >>)
