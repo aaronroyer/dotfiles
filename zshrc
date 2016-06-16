@@ -64,8 +64,8 @@ source $ZSH_DIR/completion.zsh
 
 unset COMMON_DIR ZSH_DIR
 
+# fzf shell integration
+which fzf &> /dev/null && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Do not intercept Ctrl-S and Ctrl-Q for legacy functionality
 stty -ixon
-
-which fzf &> /dev/null && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
