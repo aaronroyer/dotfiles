@@ -69,3 +69,6 @@ which fzf &> /dev/null && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Do not intercept Ctrl-S and Ctrl-Q for legacy functionality
 stty -ixon
+
+export NVM_DIR="/Users/$USER/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
