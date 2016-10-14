@@ -46,12 +46,8 @@ xc() {
 }
 
 
-# SSH shortcuts
-alias ssha='ssh aaronroyer@aaronroyer.com'
-alias sshk='ssh kristinroyer@kristinroyer.com'
-
+##### Misc dev
 alias fs='foreman start'
-
 
 
 # Filter all but specific lines from stdin
