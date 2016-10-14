@@ -48,6 +48,7 @@ xc() {
 
 ##### Misc dev
 alias fs='foreman start'
+alias mci='mvn clean install'
 
 
 # Filter all but specific lines from stdin
