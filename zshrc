@@ -68,7 +68,8 @@ unset COMMON_DIR ZSH_DIR
 which fzf &> /dev/null && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export NVM_DIR="/Users/$USER/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+NVM_SETUP_SCRIPT="/usr/local/opt/nvm/nvm.sh"
+[ -f $NVM_SETUP_SCRIPT ] && . $NVM_SETUP_SCRIPT
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
