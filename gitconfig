@@ -15,6 +15,7 @@
 	d = diff
 	nm = branch --no-merged
 	ctags = !.git/hooks/ctags
+	up = pull --rebase --autostash
 [core]
 	excludesfile = ~/.gitignore_global
 [color]
@@ -30,5 +31,3 @@
 	default = current
 [init]
 	templatedir = ~/.git_template
-[git-up "bundler"]
-	check = true
