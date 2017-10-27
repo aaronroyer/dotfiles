@@ -16,8 +16,11 @@
 	nm = branch --no-merged
 	ctags = !.git/hooks/ctags
 	up = pull --rebase --autostash
+	dd = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -R; }; f"
+	dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -R; }; f"
 [core]
 	excludesfile = ~/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -R
 [color]
 	branch = auto
 	interactive = auto
@@ -27,7 +30,7 @@
 	autosetuprebase = always
 [github]
 	user = aaronroyer
-[push]
-	default = current
 [init]
 	templatedir = ~/.git_template
+[diff-so-fancy]
+	first-run = false

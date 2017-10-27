@@ -20,13 +20,15 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'ervandew/supertab'
 Plugin 'terryma/vim-expand-region'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'google/vim-searchindex'
 
 " Language support plugins
 Plugin 'sheerun/vim-polyglot'
@@ -89,8 +91,8 @@ map <leader>n :call RenameFile()<cr>
 " map <leader>c "*y
 " Misc
 " TODO: make these use language-appropriate debug
-map <leader>d obinding.pry<Esc>
-map <leader>D Obinding.pry<Esc>
+map <leader>d oconsole.log()<Esc>i
+map <leader>D Oconsole.log()<Esc>i
 
 " vim-rspec mappings
 " nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
@@ -154,6 +156,8 @@ set foldlevel=1 " level to fold to at top level
 """ Plugin config
 let g:airline_powerline_fonts = 1
 
+let g:jsx_ext_required = 0 " allow JSX syntax highlighting in .js files
+
 if !empty($TMUX)
   if executable('run_spec')
     let g:rspec_command = 'call Send_to_Tmux("run_spec {spec}\n")'
@@ -163,7 +167,7 @@ if !empty($TMUX)
 endif
 
 if executable('ag')
-  let g:agprg="ag --column --smart-case"
+  let g:ag_prg="ag --column --smart-case"
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 
