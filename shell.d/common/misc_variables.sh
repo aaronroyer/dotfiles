@@ -15,7 +15,9 @@ export NODE_PATH=/usr/local/lib/node_modules
 export NPM_BIN_PATH=/usr/local/share/npm/bin
 export PATH="$NPM_BIN_PATH:$PATH"
 
-export JAVA_HOME=$(/usr/libexec/java_home)
+if [[ -x /usr/libexec/java_home ]]; then
+  export JAVA_HOME=$(/usr/libexec/java_home 2> /dev/null)
+fi
 
 # Colors
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
