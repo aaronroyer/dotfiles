@@ -10,6 +10,8 @@ set -o emacs
 
 export LESS='iMRw'
 
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
 # Are the following old?
 export NODE_PATH=/usr/local/lib/node_modules
 export NPM_BIN_PATH=/usr/local/share/npm/bin
