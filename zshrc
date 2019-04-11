@@ -17,10 +17,12 @@ REPORTTIME=10 # Report CPU usage for commands running longer than 10 seconds
 ##### Key bindings
 # Next 2 require option to be set as meta key in Terminal (which also
 # allows backward kill word with option+delete)
-bindkey '^[^[[D' backward-word
-bindkey '^[^[[C' forward-word
-bindkey '^[[5D' beginning-of-line
-bindkey '^[[5C' end-of-line
+# bindkey "[D" backward-word
+bindkey "\e\e[D" backward-word
+# bindkey "[C" forward-word
+bindkey "\e\e[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
 
 # Allow Control-X E to open the editor (doesn't work by default in zsh)
 autoload edit-command-line
@@ -50,11 +52,11 @@ fi
 source $COMMON_DIR/misc_variables.sh
 
 # Load shy plugin manager; if not present, then shim it
-if which shy &> /dev/null; then
-  eval "$(shy init)"
-else
+# if which shy &> /dev/null; then
+#   eval "$(shy init)"
+# else
   shy() { [ "$1" = 'load' ] && source "$2"; }
-fi
+# fi
 source $COMMON_DIR/plugins.sh
 
 # zsh specific stuff
@@ -62,7 +64,7 @@ source $COMMON_DIR/plugins.sh
 source $ZSH_DIR/new_prompt.zsh
 source $ZSH_DIR/completion.zsh
 
-unset COMMON_DIR ZSH_DIR
+# unset COMMON_DIR ZSH_DIR
 
 # fzf shell integration
 which fzf &> /dev/null && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

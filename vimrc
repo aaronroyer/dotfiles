@@ -8,7 +8,7 @@ Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
 " General plugins
 Plugin 'kien/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator', {'pinned': 1}
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 Plugin 'schickling/vim-bufonly'
 Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
@@ -34,10 +34,10 @@ Plugin 'google/vim-searchindex'
 Plugin 'sheerun/vim-polyglot'
 
 " Tool/framework support plugins
-Plugin 'tpope/vim-rails'
+" Plugin 'tpope/vim-rails'
 " Plugin 'tpope/vim-bundler'
 " Plugin 'thoughtbot/vim-rspec'
-Plugin 'janko-m/vim-test'
+" Plugin 'janko-m/vim-test'
 
 call vundle#end()
 
