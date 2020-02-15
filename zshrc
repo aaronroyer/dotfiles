@@ -69,9 +69,9 @@ source $ZSH_DIR/completion.zsh
 # fzf shell integration
 which fzf &> /dev/null && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export NVM_DIR="/Users/$USER/.nvm"
-NVM_SETUP_SCRIPT="/usr/local/opt/nvm/nvm.sh"
-[ -f $NVM_SETUP_SCRIPT ] && . $NVM_SETUP_SCRIPT
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
