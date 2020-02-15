@@ -4,6 +4,8 @@ export PROJECT_DIRS=~/Projects/pro:~/Projects/personal
 
 export DOTFILES_DIR=~/Dropbox/dotfiles
 
+export LC_ALL=en_US.UTF-8
+
 export EDITOR=vim
 # GNU Screen sets -o vi if EDITOR=vi, so we have to force it back
 set -o emacs
