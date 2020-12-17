@@ -1,4 +1,7 @@
 
+# Uncomment this and last line for performance information
+# zmodload zsh/zprof
+
 # General shell config
 # zsh options docs: http://zsh.sourceforge.net/Doc/Release/Options.html
 
@@ -77,3 +80,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # Do not intercept Ctrl-S and Ctrl-Q for legacy functionality
 stty -ixon
+
+# zprof
