@@ -1,0 +1,1 @@
+git log --pretty=oneline --abbrev-commit | fzf | cut -f 1 -d ' '
