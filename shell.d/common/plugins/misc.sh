@@ -4,26 +4,26 @@ alias simple_server='ruby -run -e httpd -- . -p 8000'
 
 
 # Display a man page in Preview
-pman() {
-  [[ -z "$1" ]] && { echo "Usage: $0 MANPAGE" >&2; return 1; }
-  man -t "${1}" | open -f -a /Applications/Preview.app
-}
+# pman() {
+#   [[ -z "$1" ]] && { echo "Usage: $0 MANPAGE" >&2; return 1; }
+#   man -t "${1}" | open -f -a /Applications/Preview.app
+# }
 
 # Simple history find
-hf() {
-  grep "$@" ~/.zhistory
-}
+# hf() {
+#   grep "$@" ~/.zhistory
+# }
 
 
 # Find (checked-in) files in current directory
 # TODO: make work without git?
-f() {
-  if [ -n "$1" ]; then
-    git ls-files | grep "$1"
-  else
-    git ls-files | fzf
-  fi
-}
+# f() {
+#   if [ -n "$1" ]; then
+#     git ls-files | grep "$1"
+#   else
+#     git ls-files | fzf
+#   fi
+# }
 
 # search the directory frontmost in the Finder
 #posfind() { find "$(posd)" -name "*$1*"; }
@@ -34,21 +34,21 @@ f() {
 
 # Opens xcworkspace file if exists, otherwise opens xcodeproj file.
 # Returns 0 if a project is found, 1 otherwise.
-xc() {
-  local project="$(ls | grep '.*\.xcworkspace$')"
-  [[ -z $project ]] && project="$(ls | grep '.*\.xcodeproj$')"
-  if [[ -n $project ]]; then
-    open $project
-  else
-    echo "No .xcworkspace or .xcodeproj files in current directory" >&2
-    return 1
-  fi
-}
+# xc() {
+#   local project="$(ls | grep '.*\.xcworkspace$')"
+#   [[ -z $project ]] && project="$(ls | grep '.*\.xcodeproj$')"
+#   if [[ -n $project ]]; then
+#     open $project
+#   else
+#     echo "No .xcworkspace or .xcodeproj files in current directory" >&2
+#     return 1
+#   fi
+# }
 
 
 ##### Misc dev
-alias fs='foreman start'
-alias mci='mvn clean install'
+# alias fs='foreman start'
+# alias mci='mvn clean install'
 
 
 # Filter all but specific lines from stdin
@@ -66,10 +66,6 @@ reload_shell() {
   echo -n "Sourcing ${rc_file}... "
   source $rc_file
   echo "Done."
-}
-
-dotfiles_project() {
-  subl $DOTFILES_DIR
 }
 
 # Make symlink dotfiles in HOME to the regular files in Dropbox.
