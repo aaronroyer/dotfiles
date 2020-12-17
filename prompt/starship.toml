@@ -1,0 +1,25 @@
+# https://starship.rs/config/
+
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+# Add prompt on same line
+[line_break]
+disabled = true
+
+[git_branch]
+# Default format: "on [$symbol$branch]($style) "
+format = "[$branch]($style) "
+
+[git_status]
+format = "([$all_status$ahead_behind]($style) )"
+staged = "[+$count](green)"
+modified = "±$count"
+
+# Don't show current version from package.json
+[package]
+disabled = true
+
+# Don't show current Node.js version
+[nodejs]
+disabled = true

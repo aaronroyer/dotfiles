@@ -63,8 +63,6 @@ source $COMMON_DIR/misc_variables.sh
 source $COMMON_DIR/plugins.sh
 
 # zsh specific stuff
-# source $ZSH_DIR/prompt.zsh
-source $ZSH_DIR/new_prompt.zsh
 source $ZSH_DIR/completion.zsh
 
 # unset COMMON_DIR ZSH_DIR
@@ -82,5 +80,8 @@ which fzf &> /dev/null && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Do not intercept Ctrl-S and Ctrl-Q for legacy functionality
 stty -ixon
+
+# Starship prompt
+eval "$(starship init zsh)"
 
 # zprof
