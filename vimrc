@@ -123,7 +123,9 @@ set ignorecase " searches are case insensitive
 set smartcase  " ...unless they contain at least one capital letter
 
 """ UI
+" https://github.com/spf13/spf13-vim/issues/540
 " set cmdheight=2
+set shortmess=a
 
 set laststatus=2 " Always show status bar
 
