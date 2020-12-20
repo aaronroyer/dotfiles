@@ -30,7 +30,5 @@
 	autosetuprebase = always
 [github]
 	user = aaronroyer
-[init]
-	templatedir = ~/.git_template
 [diff-so-fancy]
 	first-run = false
