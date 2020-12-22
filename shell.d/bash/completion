@@ -1,1 +1,0 @@
-complete -C ~/.shell.d/bash/completion_scripts/project -o default p

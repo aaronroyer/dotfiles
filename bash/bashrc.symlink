@@ -3,8 +3,6 @@ if [ -f /etc/bashrc ]; then
 fi
 
 COMMON_DIR=~/.shell.d/common
-BASH_DIR=~/.shell.d/bash
-
 
 ##### Common shell stuff
 
@@ -18,14 +16,7 @@ else
 fi
 source $COMMON_DIR/plugins.sh
 
-
-##### bash specific stuff
-
-source $BASH_DIR/completion
-source $BASH_DIR/prompt
-
-unset COMMON_DIR BASH_DIR
-
+unset COMMON_DIR
 
 ##### General shell config
 
@@ -39,3 +30,5 @@ stty -ixon
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval "$(starship init bash)"
